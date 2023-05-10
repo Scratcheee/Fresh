@@ -72,7 +72,7 @@ export const usePersonalStore = defineStore("personalInfo", {
         // Create new entry if none exist
         const { data: name } = await useAsyncData("name", async () => {
           const { data } = await supabase.from("userdata").insert(entry);
-        });
+        }); 
       }
     },
   },
