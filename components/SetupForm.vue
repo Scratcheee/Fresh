@@ -10,10 +10,10 @@
                 </div>
 
                 <div class="field">
-                    <label class="label">Gender</label>
+                    <label class="label">Sex</label>
                     <div class="control">
                         <div class="select">
-                            <select v-model="gender">
+                            <select v-model="sex">
                                 <option>Male</option>
                                 <option>Female</option>
                             </select>
@@ -75,10 +75,10 @@
                     <div class="control">
                         <div class="select">
                             <select v-model="activity">
-                                <option>Sedentary</option>
-                                <option>Lightly Active</option>
-                                <option>Active</option>
-                                <option>Very Active</option>
+                                <option :value=1.2>Sedentary</option>
+                                <option :value=1.375>Lightly Active</option>
+                                <option :value=1.55>Moderatly Active</option>
+                                <option :value=1.725>Very Active</option>
 
                             </select>
                         </div>
@@ -104,7 +104,7 @@ const personalStore = usePersonalStore()
 
 
 const startingDate = ref('')
-const gender = ref('')
+const sex = ref('')
 const currentWeight = ref('')
 const goalWeight = ref('')
 const heightIn = ref('')
@@ -116,33 +116,35 @@ const age = ref('')
 let weightLossAmount = currentWeight - goalWeight
 
 const calculateBMR = () => {
-    if (gender.value === 'Male') {
-        return (4.536 * currentWeight.value) + (15.88 * ((heightFt.value * 12) + heightIn.value)) - (5 * age.value) + 5
-    } else if (gender.value === 'Female') {
-        return (4.536 * currentWeight.value) + (15.88 * ((heightFt.value * 12) + heightIn.value)) - (5 * age.value) - 161
+    if (sex.value === 'Male') {
+        return ((4.536 * currentWeight.value) + (15.88 * ((heightFt.value * 12) + heightIn.value)) - (5 * age.value) + 5) 
+    } else if (sex.value === 'Female') {
+        return ((4.536 * currentWeight.value) + (15.88 * ((heightFt.value * 12) + heightIn.value)) - (5 * age.value) - 161)
 
     }
 }
 const calculateTotalCal = () => {
     const bmr = calculateBMR()
-    return Math.floor(bmr) + (weeklyChange.value * 500)
+    return Math.floor(bmr) * activity.value + (weeklyChange.value * 500)
 
 }
 const handleSubmit = () => {
 
+
     const totalCal = calculateTotalCal()
+
 
 
     personalStore.updateUserData({
         starting_date: startingDate.value,
-        gender: gender.value,
-        goal_weight: goalWeight.value,
-        height_in: (heightFt.value * 12) + heightIn.value,
-        age: age.value,
-        weekly_change: weeklyChange.value,
+        sex: sex.value,
+        goal_weight: parseInt(goalWeight.value),
+        height_in: parseInt((heightFt.value * 12) + heightIn.value),
+        age: parseInt(age.value),
+        weekly_change: parseFloat(weeklyChange.value),
         activity_level: activity.value,
         user_id: userStore.value.id,
-        calorie_goal: totalCal
+        calorie_goal: Math.floor(totalCal)
     })
 
 }
