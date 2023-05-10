@@ -117,9 +117,9 @@ let weightLossAmount = currentWeight - goalWeight
 
 const calculateBMR = () => {
     if (sex.value === 'Male') {
-        return ((4.536 * currentWeight.value) + (15.88 * ((heightFt.value * 12) + heightIn.value)) - (5 * age.value) + 5) 
+        return (4.536 * currentWeight.value) + (15.88 * ((heightFt.value * 12) + heightIn.value)) - (5 * age.value) + 5
     } else if (sex.value === 'Female') {
-        return ((4.536 * currentWeight.value) + (15.88 * ((heightFt.value * 12) + heightIn.value)) - (5 * age.value) - 161)
+        return (4.536 * currentWeight.value) + (15.88 * ((heightFt.value * 12) + heightIn.value)) - (5 * age.value) - 161
 
     }
 }
@@ -130,9 +130,7 @@ const calculateTotalCal = () => {
 }
 const handleSubmit = () => {
 
-
     const totalCal = calculateTotalCal()
-
 
 
     personalStore.updateUserData({

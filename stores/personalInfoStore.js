@@ -28,6 +28,7 @@ export const usePersonalStore = defineStore("personalInfo", {
     async logDaily(entry) {
       const today = new Date();
 
+      
       const supabase = useSupabaseClient();
       console.log(entry.daily_workout);
 
@@ -43,7 +44,7 @@ export const usePersonalStore = defineStore("personalInfo", {
       //         obj.name
       //       }" has a matching date (${objDate.toDateString()})`
       //     );
-      //   }
+      //   } 
       // }
 
       const { data: name } = await useAsyncData("name", async () => {
@@ -58,33 +59,20 @@ export const usePersonalStore = defineStore("personalInfo", {
       const supabase = useSupabaseClient();
       this.calorieGoal = entry.calorie_goal;
 
+
       if (this.personalInfo.length !== 0) {
         //Update entry if one does exist
-        console.log("log exists");
-        // console.log(this.personalInfo[0].id)
         const { data: name } = await useAsyncData("name", async () => {
           const { data } = await supabase
             .from("userdata")
-            .update({
-              goal_weight: entry.goal_weight,
-              starting_date: entry.starting_date,
-              height_in: entry.height_in,
-              age: entry.age,
-              weekly_change: entry.weekly_change,
-              activity_level: entry.activity_level,
-              calorie_goal: entry.calorie_goal,
-              sex: entry.sex,
-            })
+            .update({starting_date: entry.starting_date, goal_weight: entry.goal_weight, height_in: entry.height_in, age: entry.age, weekly_change: entry.weekly_change, activity_level: entry.activity_level, calorie_goal: entry.calorie_goal, sex: entry.sex})
             .eq("user_id", this.personalInfo[0].user_id);
         });
-        this.getPersonalInfo();
       } else {
         // Create new entry if none exist
-        console.log("log doesnt exist");
         const { data: name } = await useAsyncData("name", async () => {
           const { data } = await supabase.from("userdata").insert(entry);
         });
-        this.getPersonalInfo();
       }
     },
   },
