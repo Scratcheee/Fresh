@@ -1,38 +1,7 @@
 <template>
+    <Navbar />
     <div>
-        <nav class="navbar" role="navigation" aria-label="main navigation">
-            <div class="navbar-brand">
-                <NuxtLink class="navbar-item" to="/">
-                    Calorie Counter
-                </NuxtLink>
-
-            </div>
-
-            <div id="navbarBasicExample" class="navbar-menu">
-                <div class="navbar-start">
-                    <NuxtLink class="navbar-item" to="/">
-                        Home
-                    </NuxtLink>
-
-                    <NuxtLink class="navbar-item" to="/setup">
-                        Setup
-                    </NuxtLink>
-
-
-                </div>
-
-                <div class="navbar-end">
-                    <div class="navbar-item">
-                        <div class="buttons">
-                            <button v-if="user" class="button is-primary" @click="logout">Log Out</button>
-                            <NuxtLink v-else to="auth" class="button is-primary">
-                                <strong>Sign up / Log In</strong>
-                            </NuxtLink>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
+    
 
         <div>
             <slot />
