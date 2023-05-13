@@ -5,7 +5,7 @@
                 <div class="field">
                     <label class="label">Date starting</label>
                     <div class="control">
-                        <input v-model="startingDate" class="input" type="date" placeholder="Text input">
+                        <input v-model="startingDate" class="input" type="date" placeholder="Text input" required>
                     </div>
                 </div>
 
@@ -13,7 +13,7 @@
                     <label class="label">Sex</label>
                     <div class="control">
                         <div class="select">
-                            <select v-model="sex">
+                            <select v-model="sex" required>
                                 <option>Male</option>
                                 <option>Female</option>
                             </select>
@@ -24,14 +24,14 @@
                 <div class="field">
                     <label class="label">Current Weight</label>
                     <div class="control">
-                        <input class="input" type="number" placeholder="Text input" v-model="currentWeight">
+                        <input class="input" type="number" placeholder="Text input" v-model="currentWeight" required>
                     </div>
                 </div>
 
                 <div class="field">
                     <label class="label">Goal Weight</label>
                     <div class="control">
-                        <input class="input" type="number" placeholder="Text input" v-model="goalWeight">
+                        <input class="input" type="number" placeholder="Text input" v-model="goalWeight" required>
                     </div>
                 </div>
 
@@ -39,10 +39,10 @@
                     <label class="label">Height</label>
                     <div class="flex">
                         <div class="control">
-                            <input class="input" type="number" placeholder="Feet" v-model="heightFt">
+                            <input class="input" type="number" placeholder="Feet" v-model="heightFt" required>
                         </div>
                         <div class="control">
-                            <input class="input" type="number" placeholder="Inches" v-model="heightIn">
+                            <input class="input" type="number" placeholder="Inches" v-model="heightIn" required>
                         </div>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                 <div class="field">
                     <label class="label">Age</label>
                     <div class="control">
-                        <input class="input" type="number" placeholder="Text input" v-model="age">
+                        <input class="input" type="number" placeholder="Text input" v-model="age" required>
                     </div>
                 </div>
 
@@ -58,7 +58,7 @@
                     <label class="label">Weight change per week</label>
                     <div class="control">
                         <div class="select">
-                            <select v-model="weeklyChange">
+                            <select v-model="weeklyChange" required>
                                 <option>-1</option>
                                 <option>-0.5</option>
                                 <option>0</option>
@@ -74,7 +74,7 @@
                     <label class="label">Daily Activity Level</label>
                     <div class="control">
                         <div class="select">
-                            <select v-model="activity">
+                            <select v-model="activity" required>
                                 <option :value=1.2>Sedentary</option>
                                 <option :value=1.375>Lightly Active</option>
                                 <option :value=1.55>Moderatly Active</option>
