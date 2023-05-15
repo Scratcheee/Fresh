@@ -1,17 +1,17 @@
 <template>
-  <form @submit.prevent="handleSubmit">
+  <form @submit.prevent="handleSubmit" ref="entry">
     <div class="mx-5">
       <div class="field">
         <label class="label">Food/Drink</label>
         <div class="control">
-          <input class="input" type="text" placeholder="Food / Drink Name" v-model="name">
+          <input class="input" type="text" placeholder="Food / Drink Name" v-model="name" required>
         </div>
       </div>
 
       <div class="field">
         <label class="label">Calories</label>
         <div class="control ">
-          <input class="input is-success" type="number" placeholder="Calories" v-model.number='calories'>
+          <input class="input is-success" type="number" placeholder="Calories" v-model.number='calories' required>
 
         </div>
       </div>
@@ -21,7 +21,7 @@
           <label class="label">Type</label>
           <div class="control">
             <div class="select">
-              <select v-model="type">
+              <select v-model="type" required>
                 <option>Meal</option>
                 <option>Snack</option>
                 <option>Hydration</option>
@@ -35,7 +35,7 @@
           <label class="label">Hunger Level</label>
           <div class="control">
             <div class="select">
-              <select v-model.number="hunger">
+              <select v-model.number="hunger" required>
                 <option>0</option>
                 <option>1</option>
                 <option>2</option>
@@ -82,7 +82,7 @@ const localDate = date.toLocaleDateString('en-US', { timeZone: userTimezone });
 const localTime = date.toLocaleTimeString('en-US', { timeZone: userTimezone });
 
 
-const handleSubmit = () => {
+const handleSubmit = (e) => {
   // const timestamp = new Date()
         
   foodStore.addEntry({
@@ -94,7 +94,7 @@ const handleSubmit = () => {
     time: localTime,
     user_id: userStore.value.id
   })
-  // console.log(userStore.value.id)
+  e.target.reset()
 }
 
   

@@ -51,11 +51,9 @@ const foodStore = useFoodLogStore()
 const userStore = useSupabaseUser()
 
 
-const currentWeight = ref('250')
+const currentWeight = ref('')
 const dailyWorkout = ref(0)
 const date = new Date();
-console.log(date)
-console.log(date.toLocaleString())
 
 const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 const localDate = date.toLocaleDateString('en-US', { timeZone: userTimezone });
