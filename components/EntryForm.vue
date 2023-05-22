@@ -95,6 +95,7 @@ const handleSubmit = (e) => {
     user_id: userStore.value.id
   })
   e.target.reset()
+  alert('entry logged')
 }
 
   

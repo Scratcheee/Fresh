@@ -2,7 +2,7 @@
     <div class="card">
         <header class="card-header">
             <p class="card-header-title justify-center">
-                {{ personalStore.calorieGoal - foodStore.todaysCals }} Calories Remaining Today
+                {{ Math.abs(personalStore.calorieGoal - foodStore.todaysCals) }} {{ (personalStore.calorieGoal - foodStore.todaysCals >= 0) ? "Calories Remaining Today" : "Calories Over Today" }}
             </p>
 
         </header>
