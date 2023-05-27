@@ -64,14 +64,33 @@ const workoutCal = personalStore.personalInfo[0].workout_cal
 
 
 
+const calculateBMR = (info) => {
+    if (info.sex === 'Male') {
+        return (4.536 * personalStore.weightLog[personalStore.weightLog.length - 1].weight) + (15.88 * info.height_in) - (5 * info.age) + 5
+
+
+    } else if (sex.value === 'Female') {
+        return (4.536 * personalStore.weightLog[personalStore.weightLog.length - 1].weight) + (15.88 * info.height_in) - (5 * info.age) - 161
+
+    }
+}
+const calculateTotalCal = (info) => {
+    const bmr = calculateBMR(info)
+    return Math.floor(bmr) * info.activity_level + (info.weekly_change * 500)
+ 
+
+}
+
 const logDailyUpdate = () => {
-    // console.log(currentWeight.value)
     personalStore.logDaily({
         // date: localDate,
         weight: currentWeight.value,
         user_id: userStore.value.id,
         workout: parseFloat(dailyWorkout.value.number)
 
+    })
+    personalStore.updateDailyCals({
+        calorie_goal: Math.floor(calculateTotalCal(personalStore.personalInfo[0]))
     })
 }
 

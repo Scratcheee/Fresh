@@ -54,7 +54,7 @@ export const usePersonalStore = defineStore("personalInfo", {
 
       if (this.personalInfo.length !== 0) {
         //Update entry if one does exist
-        console.log('updating existing')
+        console.log("updating existing");
         const { data: name } = await useAsyncData("name", async () => {
           const { data } = await supabase
             .from("userdata")
@@ -77,6 +77,18 @@ export const usePersonalStore = defineStore("personalInfo", {
           const { data } = await supabase.from("userdata").insert(entry);
         });
       }
+    },
+    async updateDailyCals(entry) {
+      const supabase = useSupabaseClient();
+
+      const { data: name } = await useAsyncData("name", async () => {
+        const { data } = await supabase
+          .from("userdata")
+          .update({
+            calorie_goal: entry.calorie_goal,
+          })
+          .eq("user_id", this.personalInfo[0].user_id);
+      });
     },
   },
 });
