@@ -2,7 +2,8 @@
     <div class="card">
         <header class="card-header">
             <p class="card-header-title justify-center">
-                {{ Math.abs(personalStore.calorieGoal - foodStore.todaysCals) }} {{ (personalStore.calorieGoal - foodStore.todaysCals >= 0) ? "Calories Remaining Today" : "Calories Over Today" }}
+                {{ remainingCal + (workout * workoutCal ) }} {{ (remainingCal + (workout * workoutCal ) >= 0) ? "Calories Remaining Today" : "Calories Over Today" }}
+                
             </p>
 
         </header>
@@ -57,6 +58,10 @@ const date = new Date();
 
 const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 const localDate = date.toLocaleDateString('en-US', { timeZone: userTimezone });
+const remainingCal = Math.abs(personalStore.calorieGoal - foodStore.todaysCals)
+const workout = personalStore.weightLog[personalStore.weightLog.length - 1].workout
+const workoutCal = personalStore.personalInfo[0].workout_cal
+
 
 
 const logDailyUpdate = () => {

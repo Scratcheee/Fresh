@@ -1,4 +1,5 @@
 <template>
+    <div class="flex justify-center items-center mt-3">
     <form @submit.prevent="handleSubmit">
         <div class="flex flex-col justify-center">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -84,15 +85,22 @@
                         </div>
                     </div>
                 </div>
+                <div class="field">
+                    <label class="label">Workout Calories</label>
+                    <div class="control">
+                        <input class="input" type="number" placeholder="Text input" v-model="workout_cal" required>
+                    </div>
+                </div>
 
             </div>
-            <div class="control flex justify-center">
+            <div class="control flex justify-center mt-10">
                 <button class="button is-link">Submit</button>
             </div>
         </div>
     </form>
-    <div>Reach your goal by:</div>
-    <div>Weight loss amount: {{ weightLossAmount }}</div>
+    
+</div>
+
 </template>
 
 <script setup>
@@ -112,6 +120,8 @@ const heightFt = ref('')
 const weeklyChange = ref('')
 const activity = ref('')
 const age = ref('')
+const workout_cal = ref('')
+
 
 let weightLossAmount = currentWeight - goalWeight
 
@@ -142,7 +152,8 @@ const handleSubmit = () => {
         weekly_change: parseFloat(weeklyChange.value),
         activity_level: activity.value,
         user_id: userStore.value.id,
-        calorie_goal: Math.floor(totalCal)
+        calorie_goal: Math.floor(totalCal),
+        workout_cal: workout_cal.value
     })
 
 }
