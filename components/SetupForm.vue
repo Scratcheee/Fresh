@@ -1,4 +1,5 @@
 <template>
+    <form @submit.prevent="saveSettings">
     <div class="flex justify-center items-center mt-3">
 
         <div class="flex flex-col justify-center">
@@ -94,13 +95,13 @@
 
             </div>
             <div class="control flex justify-center mt-10">
-                <button class="button" @click="() => {
+                <button type="button" class="button bg-blue-300" @click="() => {
                     showBmr = true
                     handleSubmit()
                 }">Calculate</button>
             </div>
             <div class="control flex justify-center mt-10">
-            <button class="button is-link" @click="saveSettings()">Submit</button>
+            <button class="button is-link" type="submit">Submit</button>
         </div>
             <div v-if="showBmr">
                 <div>Base Metabolism Rate: {{ Math.floor(calculateBMR(sex)) }} Calories</div>
@@ -113,6 +114,7 @@
 
 
     </div>
+</form>
 </template>
 
 <script setup>
