@@ -1,7 +1,7 @@
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ['@nuxtjs/supabase', "@nuxtjs/tailwindcss", "@pinia/nuxt"],
+  modules: ['@nuxtjs/supabase', "@nuxtjs/tailwindcss", "@pinia/nuxt",],
   app: {
     head: {
       link: [
@@ -16,5 +16,10 @@ export default defineNuxtConfig({
         },
       ],
     },
+    
   },
+  css: [
+    '@fortawesome/fontawesome-svg-core/styles.css'
+  ],
+  
 });

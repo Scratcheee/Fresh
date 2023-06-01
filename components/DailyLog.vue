@@ -8,6 +8,7 @@
       <th>Type</th>
       <th>Hunger</th>
       <th>Time</th>
+      <th></th>
 
 
 
@@ -24,6 +25,9 @@
       <td>{{ entry.type }}</td>
       <td>{{ entry.hunger }}</td>
       <td>{{ entry.time}}</td>
+      <td><font-awesome-icon icon="fa-solid fa-pen-to-square" /></td>
+      
+
 
 
     </tr>

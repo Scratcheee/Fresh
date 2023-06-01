@@ -7,8 +7,8 @@
             <slot />
         </div>
     </div>
-    <div class="fixed bottom-0 right-0 m-4 p-4">
-    version 0.0.2
+    <div class="fixed bottom-0 right-0 m-4 p-4 text-xs">
+    version 0.0.3
 
     </div>
 </template>
