@@ -64,6 +64,8 @@ const workoutCal = personalStore.personalInfo[0].workout_cal
 
 
 
+
+
 const calculateBMR = (info) => {
     if (info.sex === 'Male') {
         return (4.536 * personalStore.weightLog[personalStore.weightLog.length - 1].weight) + (15.88 * info.height_in) - (5 * info.age) + 5

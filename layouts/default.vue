@@ -17,7 +17,6 @@
 import { useFoodLogStore } from '@/stores/foodLogStore';
 import { usePersonalStore } from '@/stores/personalInfoStore';
 // import { useUserStore } from '@/stores/userStore';
-import LoginPage from '~~/pages/auth.vue';
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 // const userStore = useUserStore()

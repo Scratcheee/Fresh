@@ -25,7 +25,7 @@
       <td>{{ entry.type }}</td>
       <td>{{ entry.hunger }}</td>
       <td>{{ entry.time}}</td>
-      <td><font-awesome-icon icon="fa-solid fa-pen-to-square" /></td>
+      <!-- <td><font-awesome-icon icon="fa-solid fa-pen-to-square" /></td> -->
       
 
 
