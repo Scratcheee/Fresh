@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col sm:flex-row">
+    <div class="flex flex-col sm:flex-row" v-if="user">
         <div class="flex flex-col basis-1/3 mx-5 mt-3 grow">
             <div>
                 <DailyInputs />
@@ -12,6 +12,10 @@
         <div class="flex flex-col basis-1/3 mx-5 mt-3 grow">
             <DailyLog />
     </div>
+</div>
+<div v-else>
+    <h1>Loading...</h1>
+    <h2>Please Wait</h2>
 </div>
 </template>
 

@@ -9,12 +9,13 @@
         </header>
         <div class="card-content flex flex-col">
 
-            <div class="flex justify-around">
-                <div class="field">
+            <div class="flex justify-around flex-col">
+                <div class="flex justify-around gap-6">
+                    <div class="field">
                     <label class="label">Todays Weight</label>
                     <div class="control flex gap-1">
-                        <input class="input w-1/6" type="text" placeholder="Text input" v-model="currentWeight">
-                        <button class="button" @click="logDailyUpdate">Log Daily Entry</button>
+                        <input class="input " type="text" placeholder="Text input" v-model="currentWeight">
+                        
                     </div>
                 </div>
                 <div class="field">
@@ -32,6 +33,9 @@
                     </div>
 
                 </div>
+                </div>
+                
+                <button class="button" @click="logDailyUpdate">Log Daily Entry</button>
             </div>
             <div class="content flex flex-col ">
                 <p>1.375 weight loss today</p>
@@ -99,4 +103,12 @@ const logDailyUpdate = () => {
 
 </script>
 
-<style scoped></style>
+<style scoped>
+.button {
+    background: #9F46E4;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 15px;
+    color: #FFFFFF;
+    height: 55px;
+}
+</style>

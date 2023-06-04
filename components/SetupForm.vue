@@ -105,7 +105,7 @@
         </div>
             <div v-if="showBmr">
                 <div>Base Metabolism Rate: {{ Math.floor(calculateBMR(sex)) }} Calories</div>
-                <div>Daily Calories to eat: {{ calculateTotalCal(calculateBMR(sex)) }} Calories</div>
+                <div>Daily Calories to eat: {{ Math.floor(calculateTotalCal(calculateBMR(sex))) }} Calories</div>
             </div>
 
 

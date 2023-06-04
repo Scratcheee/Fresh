@@ -1,5 +1,5 @@
 <template>
-    <Disclosure as="nav" class="bg-gray-800" v-slot="{ open }">
+    <Disclosure as="nav" class="nav" v-slot="{ open }">
       <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div class="relative flex h-16 items-center justify-between">
           <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -61,3 +61,18 @@
     // { name: 'Dashboard', href: '#', current: false },
   ]
   </script>
+
+  <style scoped>
+  .nav {
+    background: #9A72D9;
+  }
+  .button {
+    background: #9F46E4;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 15px;
+    color: #FFFFFF;
+    height: 50px;
+    border-color: gray;
+}
+
+</style>
