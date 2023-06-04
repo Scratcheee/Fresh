@@ -39,13 +39,25 @@ export const useFoodLogStore = defineStore("foodLog", {
   actions: {
     async getLog() {
       const supabase = useSupabaseClient();
+      const date = new Date();
+      const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      const localDate = date.toLocaleDateString("en-US", {
+        timeZone: userTimezone,
+      });
+
+
+      const parts1 = localDate.split("/");
+      const formattedLocalDate = `${parts1[2]}-${parts1[0].padStart(
+        2,
+        "0"
+      )}-${parts1[1].padStart(2, "0")}`;
+
       const { data: name } = await useAsyncData("name", async () => {
-        const { data } = await supabase.from("foodlog").select("*");
+        const { data } = await supabase.from("foodlog").select("*").eq('date', formattedLocalDate);
 
         this.foodLog = data;
       });
 
-      // console.log(this.foodLog);
     },
 
     async addEntry(entry) {
@@ -56,10 +68,8 @@ export const useFoodLogStore = defineStore("foodLog", {
       const { data: name } = await useAsyncData("name", async () => {
         const { data } = await supabase.from("foodlog").insert(entry);
       });
-      console.log(this.todaysMeals)
 
       this.todaysMeals
-      console.log(this.todaysMeals)
     },
   },
 });

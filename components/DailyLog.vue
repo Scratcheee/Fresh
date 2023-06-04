@@ -1,14 +1,14 @@
 <template>
-   <table class="table">
-  <thead>
-    <tr>
+   <table class="table rounded-xl">
+  <thead class="">
+    <tr class="tablehead">
     
       <th>Food/Drink</th>
       <th>Calories</th>
       <th>Type</th>
       <th>Hunger</th>
-      <th>Time</th>
-      <th></th>
+      <!-- <th>Time</th> -->
+      <!-- <th></th> -->
 
 
 
@@ -18,14 +18,14 @@
  
   <tbody>
     
-    <tr v-for="(entry, index) in store.todaysMeals" :key="index">
+    <tr v-for="(entry, index) in store.foodLog" :key="index">
       
       <th>{{entry.name}}</th>
       <td>{{entry.calories}}</td> 
       <td>{{ entry.type }}</td>
       <td>{{ entry.hunger }}</td>
-      <td>{{ entry.time}}</td>
-      <td><font-awesome-icon icon="fa-solid fa-pen-to-square" /></td>
+      <!-- <td>{{ entry.time}}</td> -->
+      <!-- <td><font-awesome-icon icon="fa-solid fa-pen-to-square" /></td> -->
       
 
 
@@ -49,5 +49,16 @@
 </script>
 
 <style scoped>
+.tablehead {
+  background-color: #9F46E4;
+  border-radius: 10px;
+  
 
+}
+.tablehead th {
+  color: white;
+}
+.table {
+  background-color: #F2EBFF;
+}
 </style>

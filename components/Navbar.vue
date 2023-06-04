@@ -1,5 +1,5 @@
 <template>
-    <Disclosure as="nav" class="bg-gray-800" v-slot="{ open }">
+    <Disclosure as="nav" class="nav" v-slot="{ open }">
       <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div class="relative flex h-16 items-center justify-between">
           <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -21,9 +21,7 @@
           <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
             <div class="buttons">
                             <button v-if="user" class="button is-primary" @click="logout">Log Out</button>
-                            <NuxtLink v-else to="auth" class="button is-primary">
-                                <strong>Log In</strong>
-                            </NuxtLink>
+
                         </div>
           </div>
         </div>
@@ -57,9 +55,24 @@
   const navigation = [
   
   
-    { name: 'Home', href: '/', current: true },
+    { name: 'Home', href: '/home', current: true },
     { name: 'Settings', href: '/setup', current: false },
-    { name: 'History', href: '#', current: false },
-    { name: 'Dashboard', href: '#', current: false },
+    // { name: 'History', href: '#', current: false },
+    // { name: 'Dashboard', href: '#', current: false },
   ]
   </script>
+
+  <style scoped>
+  .nav {
+    background: #9A72D9;
+  }
+  .button {
+    background: #9F46E4;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 15px;
+    color: #FFFFFF;
+    height: 50px;
+    border-color: gray;
+}
+
+</style>
