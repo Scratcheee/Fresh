@@ -1,5 +1,5 @@
 <template>
-   <table class="table rounded-xl">
+   <table class="table rounded-xl ">
   <thead class="">
     <tr class="tablehead">
     
