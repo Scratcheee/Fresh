@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="handleSubmit" ref="entry" class="bg-white rounded-xl p-3 my-5">
+  <form @submit.prevent="handleSubmit" ref="entry" class="">
     <div class="mx-5 flex flex-col m-3">
       <div class="field">
         <label class="label">Food/Drink</label>
@@ -111,5 +111,12 @@ input, select {
   background: #F2EBFF;
   border-radius: 10px;
   color: #805cb9
+}
+form {
+  background: #FFFFFF;
+box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+border-radius: 10px;
+padding: 12px;
+margin: 20px 0px 20px 0px;
 }
 </style>
