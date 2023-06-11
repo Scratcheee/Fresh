@@ -19,7 +19,7 @@
 
       <tr v-for="(entry, index) in store.foodLog" :key="index">
 
-        <th>{{ entry.name }}</th>
+        <th @mouseover="mouseOver" >{{ entry.name.substring(0,8) }}{{ (entry.name.length > 8) ? "..." : "" }}</th>
         <td>{{ entry.calories }}</td>
         <td>{{ entry.type }}</td>
         <!-- <td>{{ entry.time}}</td> -->
@@ -38,6 +38,10 @@
 import { useFoodLogStore } from '@/stores/foodLogStore';
 
 const store = useFoodLogStore()
+
+const mouseOver = () => {
+
+}
 
 
 

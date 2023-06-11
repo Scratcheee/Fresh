@@ -34,8 +34,7 @@
 
                 </div>
                 </div>
-                
-                <button class="button" @click="logDailyUpdate">Log Daily Entry</button>
+                <ActionButton @click="logDailyUpdate" text="Log Daily Entry" />
             </div>
             <div class="content flex flex-col ">
                 <p>1.375 weight loss today</p>
@@ -104,11 +103,5 @@ const logDailyUpdate = () => {
 </script>
 
 <style scoped>
-.button {
-    background: #9F46E4;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
-    border-radius: 15px;
-    color: #FFFFFF;
-    height: 55px;
-}
+
 </style>

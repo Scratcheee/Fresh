@@ -3,17 +3,21 @@
         <form @submit.prevent="() => (isSignUp ? signUp() : login())" class="flex flex-col gap-2">
             <input type="email" placeholder="Email" v-model="email" class="p-2 bg-gray-600 rounded text-white" />
             <input type="password" placeholder="Password" v-model="password" class="p-2 bg-gray-600 rounded text-white" />
-            <button type="submit" class="p-2 font-medium text-white bg-green-500 rounded hover:bg-green-400">
-                <span v-if="isSignUp"> Sign up </span>
-                <span v-else> Log in </span>
-            </button>
+
+            <ActionButton type="submit" v-if="isSignUp" text="Sign Up" />
+            <ActionButton type="submit" v-else text="Log in" />
+
 
 
         </form>
 
         <button @click="isSignUp = !isSignUp" class="w-full mt-8 text-sm text-center underline text-slate-600">
             <span v-if="isSignUp"> Have an account? Log in instead </span>
-            <span v-else> Create a new account </span>
+            <div v-else class="flex flex-col">
+                <span> Create a new account </span>
+                <NuxtLink to="/renew">Forgot Password?</NuxtLink>
+            </div>
+
         </button>
     </div>
 </template>
@@ -37,13 +41,10 @@ const signUp = async () => {
 }
 
 const login = async () => {
-    console.log('signin')
     const { user, error } = await client.auth.signInWithPassword({
         email: email.value,
         password: password.value
     })
-    console.log('user', user)
-    console.log('error', error)
 
 
 }
