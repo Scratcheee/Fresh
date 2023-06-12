@@ -101,7 +101,7 @@
                 }">Calculate</button>
             </div>
             <div class="control flex justify-center mt-10">
-            <button class="button is-link" type="submit">Submit</button>
+            <ActionButton type="submit" text="Save" class="w-full" />
         </div>
             <div v-if="showBmr">
                 <div>Base Metabolism Rate: {{ Math.floor(calculateBMR(sex)) }} Calories</div>

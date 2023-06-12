@@ -1,6 +1,6 @@
 <template>
-  <form @submit.prevent="handleSubmit" ref="entry">
-    <div class="mx-5">
+  <form @submit.prevent="handleSubmit" ref="entry" class="">
+    <div class="mx-5 flex flex-col m-3">
       <div class="field">
         <label class="label">Food/Drink</label>
         <div class="control">
@@ -11,17 +11,17 @@
       <div class="field">
         <label class="label">Calories</label>
         <div class="control ">
-          <input class="input is-success" type="number" placeholder="Calories" v-model.number='calories' required>
+          <input class="input" type="number" placeholder="Calories" v-model.number='calories' required>
 
         </div>
       </div>
 
-      <div class="flex justify-around">
-        <div class="field">
+
+        <div class="field ">
           <label class="label">Type</label>
-          <div class="control">
-            <div class="select">
-              <select v-model="type" required>
+          <div class="control ">
+            <div class="select w-full">
+              <select v-model="type" required class="w-full">
                 <option>Meal</option>
                 <option>Snack</option>
                 <option>Hydration</option>
@@ -32,10 +32,10 @@
         </div>
 
         <div class="field">
-          <label class="label">Hunger Level</label>
+          <label class="label">Hunger</label>
           <div class="control">
-            <div class="select">
-              <select v-model.number="hunger" required>
+            <div class="select w-full">
+              <select v-model.number="hunger" required class="w-full">
                 <option>0</option>
                 <option>1</option>
                 <option>2</option>
@@ -46,17 +46,13 @@
             </div>
           </div>
         </div>
-      </div>
 
 
 
 
-      <div class="field is-grouped">
-        <div class="control">
-          <button class="button is-link">Submit</button>
-        </div>
 
-      </div>
+          <ActionButton text="Add" />
+
     </div>
   </form>
 </template>
@@ -95,10 +91,26 @@ const handleSubmit = (e) => {
     user_id: userStore.value.id
   })
   e.target.reset()
-  alert('entry logged')
 }
 
   
 </script>
 
-<style scoped></style>
+<style scoped>
+
+label {
+  color: #805CB9
+}
+input, select {
+  background: #F2EBFF;
+  border-radius: 10px;
+  color: #805cb9
+}
+form {
+  background: #FFFFFF;
+box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+border-radius: 10px;
+padding: 12px;
+margin: 20px 0px 20px 0px;
+}
+</style>
