@@ -3,6 +3,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     'ActionButton': typeof import("../components/ActionButton.vue")['default']
     'Auth': typeof import("../components/Auth.vue")['default']
+    'CalorieProgressBar': typeof import("../components/CalorieProgressBar.vue")['default']
     'DailyInputs': typeof import("../components/DailyInputs.vue")['default']
     'DailyLog': typeof import("../components/DailyLog.vue")['default']
     'EntryForm': typeof import("../components/EntryForm.vue")['default']
@@ -29,6 +30,7 @@ declare module 'vue' {
     'Body': typeof import("../node_modules/nuxt/dist/head/runtime/components")['Body']
     'LazyActionButton': typeof import("../components/ActionButton.vue")['default']
     'LazyAuth': typeof import("../components/Auth.vue")['default']
+    'LazyCalorieProgressBar': typeof import("../components/CalorieProgressBar.vue")['default']
     'LazyDailyInputs': typeof import("../components/DailyInputs.vue")['default']
     'LazyDailyLog': typeof import("../components/DailyLog.vue")['default']
     'LazyEntryForm': typeof import("../components/EntryForm.vue")['default']
@@ -58,6 +60,7 @@ declare module 'vue' {
 
 export const ActionButton: typeof import("../components/ActionButton.vue")['default']
 export const Auth: typeof import("../components/Auth.vue")['default']
+export const CalorieProgressBar: typeof import("../components/CalorieProgressBar.vue")['default']
 export const DailyInputs: typeof import("../components/DailyInputs.vue")['default']
 export const DailyLog: typeof import("../components/DailyLog.vue")['default']
 export const EntryForm: typeof import("../components/EntryForm.vue")['default']
@@ -84,6 +87,7 @@ export const Html: typeof import("../node_modules/nuxt/dist/head/runtime/compone
 export const Body: typeof import("../node_modules/nuxt/dist/head/runtime/components")['Body']
 export const LazyActionButton: typeof import("../components/ActionButton.vue")['default']
 export const LazyAuth: typeof import("../components/Auth.vue")['default']
+export const LazyCalorieProgressBar: typeof import("../components/CalorieProgressBar.vue")['default']
 export const LazyDailyInputs: typeof import("../components/DailyInputs.vue")['default']
 export const LazyDailyLog: typeof import("../components/DailyLog.vue")['default']
 export const LazyEntryForm: typeof import("../components/EntryForm.vue")['default']

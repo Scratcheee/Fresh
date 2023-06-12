@@ -90,7 +90,11 @@ const handleSubmit = (e) => {
     time: localTime,
     user_id: userStore.value.id
   })
-  e.target.reset()
+  
+  type.value = ""
+  hunger.value = ""
+  name.value = ""
+  calories.value = ""
 }
 
   
