@@ -1,7 +1,7 @@
 <template>
     <div class="card">
         <header class="card-header">
-            <p class="card-header-title justify-center">
+            <p class="card-header-title justify-center" v-if="workout >= 0">
                 {{ remainingCal + (workout * workoutCal ) }} {{ (remainingCal + (workout * workoutCal ) >= 0) ? "Calories Remaining Today" : "Calories Over Today" }}
                 
             </p>
@@ -64,6 +64,8 @@ const localDate = date.toLocaleDateString('en-US', { timeZone: userTimezone });
 const remainingCal = Math.abs(personalStore.calorieGoal - foodStore.todaysCals)
 const workout = personalStore.weightLog[personalStore.weightLog.length - 1].workout
 const workoutCal = personalStore.personalInfo[0].workout_cal
+
+console.log(remainingCal)
 
 
 
