@@ -1,58 +1,124 @@
 <template>
-    <div class="flex items-center flex-col ">
-    <div class="container">
-        <div class="circular-progress">
-            <span class="progress-value">2353</span>
-            <span class="text">calories left today</span>
+    <div class="flex items-center flex-col bg-purple-400 ">
+        <div class="container">
+
+            <div class="container__progressbars">
+
+                <div class="progressbar">
+                    <svg class="progressbar__svg">
+                        <circle cx="80" cy="80" r="70" class="progressbar__svg-circle circle-html "> </circle>
+                    </svg>
+                    <span class="progressbar__text ">{{calCount}}</span>
+                    
+                    
+                </div>
+
+
+            </div>
         </div>
-    </div>
-    <div>300 Exercise</div>
-    <div>1400 calories</div>
+        <!-- <div class="flex flex-col w-full">
+            <div class="flex justify-around">
+            <p>0.25LBS Gained Yesterday</p>
+        </div>
+        <div class="flex justify-around ">
+            <p class="bg-red-500">Worked Out</p>
+        <p class="bg-green-500">Ate Below Calories</p>
+        </div>
+        </div> -->
+
+
     </div>
 </template>
 
 <script setup>
+defineProps({
+    calCount: String
+})
+let percentage = 30
 
 </script>
 
 <style scoped>
-.container  {
+.container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.circular-progress {
-    position: relative;
-    height: 20vh;
-    width: 20vh;
-    background: conic-gradient(#fff 3.6deg, #805CB9 0deg);
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
 
 }
-.circular-progress::before {
-    content: "";
-    position: absolute;
-    height: 23.5vh;
-    width: 23.5vh;
-    background-color: #fff;
-    border-radius: 50%;
-}
-.progress-value {
-    position: relative;
-    font-size: 40px;
-    font-weight: 600;
-}
-.text {
-    position: relative;
-}
+
+
 @media screen and (min-width: 600px) {
-  .circular-progress::before {
-    height: 19.5vh;
-    width: 19.5vh;
-  }
+    .circular-progress::before {
+        height: 17.5vh;
+        width: 17.5vh;
+    }
+
+    .circular-progress {
+        position: relative;
+        height: 18vh;
+        width: 18vh;
+    }
+
+
 }
-</style>
+
+.container__progressbars {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    min-width: 270px;
+    width: 100%;
+    min-height: 100%;
+}
+
+.progressbar {
+    position: relative;
+    width: 170px;
+    height: 170px;
+    margin: 1em;
+    transform: rotate(-90deg);
+}
+
+.progressbar__svg-circle {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke-width: 10;
+    stroke-dasharray: 440;
+    stroke-dashoffset: 440;
+    stroke: hsl(0, 0%, 100%);
+    stroke-linecap: round;
+    transform: translate(5px, 5px);
+}
+
+
+.progressbar__svg {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.circle-html {
+
+    animation: anim_circle-html 1s ease-in-out forwards;
+
+}
+
+.progressbar__text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    padding: 0.25em 0.5em;
+    color: hsl(0, 0%, 100%);
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 0.25em;
+    font-size: 34px;
+    transform: translate(-50%, -50%) rotate(90deg);
+}
+
+@keyframes anim_circle-html {
+    to {
+        stroke-dashoffset: 50%
+    }
+}</style>

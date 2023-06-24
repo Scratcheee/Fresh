@@ -1,5 +1,5 @@
 <template>
-  <table class="table rounded-xl mb-6 ">
+  <table class="table rounded-xl my-6 ">
     <thead class="">
       <tr >
 

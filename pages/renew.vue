@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w-lg mx-auto mt-8">
+    <div class="max-w-lg mx-4 mt-8">
         Renew Password
         <form @submit.prevent="handleRenewEmail" class="flex flex-col gap-2">
             <input type="email" placeholder="Email" v-model="email" class="p-2 bg-gray-600 rounded text-white" />

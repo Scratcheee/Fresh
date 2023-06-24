@@ -34,6 +34,7 @@ const signUp = async () => {
         email: email.value,
         password: password.value
     })
+    
     console.log('user', user)
     console.log('error', error)
 

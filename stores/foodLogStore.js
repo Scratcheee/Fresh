@@ -6,30 +6,30 @@ export const useFoodLogStore = defineStore("foodLog", {
     meals: this.todaysMeals
   }),
   getters: {
-    todaysMeals() {
-      const date = new Date();
+    // todaysMeals() {
+    //   const date = new Date();
 
-      const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      const localDate = date.toLocaleDateString("en-US", {
-        timeZone: userTimezone,
-      });
-
-
-      const parts1 = localDate.split("/");
-      const formattedLocalDate = `${parts1[2]}-${parts1[0].padStart(
-        2,
-        "0"
-      )}-${parts1[1].padStart(2, "0")}`;
-
-      const filteredLog = this.foodLog.filter(
-        (entry) => entry.date.toString() === formattedLocalDate
-      );
+    //   const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    //   const localDate = date.toLocaleDateString("en-US", {
+    //     timeZone: userTimezone,
+    //   });
 
 
-      return filteredLog;
-    },
+    //   const parts1 = localDate.split("/");
+    //   const formattedLocalDate = `${parts1[2]}-${parts1[0].padStart(
+    //     2,
+    //     "0"
+    //   )}-${parts1[1].padStart(2, "0")}`;
+
+    //   const filteredLog = this.foodLog.filter(
+    //     (entry) => entry.date.toString() === formattedLocalDate
+    //   );
+
+
+    //   return filteredLog;
+    // },
     todaysCals() {
-      return this.todaysMeals.reduce((total, item) => {
+      return this.foodLog.reduce((total, item) => {
 
         return total + item.calories;
       }, 0);

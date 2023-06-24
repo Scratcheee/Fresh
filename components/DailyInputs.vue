@@ -37,8 +37,9 @@
                 <ActionButton @click="logDailyUpdate" text="Log Daily Entry" />
             </div>
             <div class="content flex flex-col ">
-                <p>1.375 weight loss today</p>
-                <p>1.8lbs gained in 12 days (total weight loss)</p>
+                <!-- <p>1.375 weight loss today</p>
+                <p>1.8lbs gained in 12 days (total weight loss)</p> -->
+                <p>Successfully logged</p>
             </div>
         </div>
     </div>
