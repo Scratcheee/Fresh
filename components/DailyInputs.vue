@@ -1,12 +1,12 @@
 <template>
     <div class="card">
-        <header class="card-header">
+        <!-- <header class="card-header">
             <p class="card-header-title justify-center" v-if="workout >= 0">
                 {{ remainingCal + (workout * workoutCal ) }} {{ (remainingCal + (workout * workoutCal ) >= 0) ? "Calories Remaining Today" : "Calories Over Today" }}
                 
             </p>
 
-        </header>
+        </header> -->
         <div class="card-content flex flex-col">
 
             <div class="flex justify-around flex-col">
@@ -34,11 +34,12 @@
 
                 </div>
                 </div>
-                <ActionButton @click="logDailyUpdate" text="Log Daily Entry" />
+                <ActionButton @click="logDailyUpdate" text="Log Daily Entry" class="accent-button" />
             </div>
             <div class="content flex flex-col ">
-                <p>1.375 weight loss today</p>
-                <p>1.8lbs gained in 12 days (total weight loss)</p>
+                <!-- <p>1.375 weight loss today</p>
+                <p>1.8lbs gained in 12 days (total weight loss)</p> -->
+                <p>Successfully logged</p>
             </div>
         </div>
     </div>
@@ -90,7 +91,7 @@ const calculateTotalCal = (info) => {
 
 const logDailyUpdate = () => {
     personalStore.logDaily({
-        // date: localDate,
+        date: localDate,
         weight: currentWeight.value,
         user_id: userStore.value.id,
         workout: parseFloat(dailyWorkout.value.number)
@@ -105,5 +106,12 @@ const logDailyUpdate = () => {
 </script>
 
 <style scoped>
+
+.card {
+    background: #e0e9f1;
+}
+.accent-button {
+  background-color: #4b82a4;
+}
 
 </style>

@@ -7,8 +7,8 @@
             <slot />
         </div>
     </div>
-    <div class="fixed bottom-0 right-0 m-4 p-4 text-xs">
-    version 0.0.4
+    <div class="fixed bottom-0 right-0 m-4 p-4 text-xs text-slate-300 ">
+    version 0.0.5
 
     </div>
 </template>
@@ -40,6 +40,8 @@ foodStore.getLog()
 const personalStore = usePersonalStore()
 personalStore.getPersonalInfo()
 personalStore.getWeightLog()
+personalStore.getTodaysWorkout()
+
 
 
 
