@@ -5,6 +5,8 @@ export const usePersonalStore = defineStore("personalInfo", {
     calorieGoal: 0,
     weightLog: [],
     personalInfo: [],
+    workoutCals: 0,
+    todaysWorkout: 0,
   }),
   actions: {
     async getPersonalInfo() {
@@ -14,6 +16,7 @@ export const usePersonalStore = defineStore("personalInfo", {
 
         this.personalInfo = data;
         this.calorieGoal = data[0].calorie_goal;
+        this.workoutCals = data[0].workout_cal;
       });
     },
     async getWeightLog() {
@@ -90,5 +93,31 @@ export const usePersonalStore = defineStore("personalInfo", {
           .eq("user_id", this.personalInfo[0].user_id);
       });
     },
+    async getTodaysWorkout() {
+      const supabase = useSupabaseClient();
+      const date = new Date();
+      const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      const localDate = date.toLocaleDateString("en-US", {
+        timeZone: userTimezone,
+      });
+
+
+      const parts1 = localDate.split("/");
+      const formattedLocalDate = `${parts1[2]}-${parts1[0].padStart(
+        2,
+        "0"
+      )}-${parts1[1].padStart(2, "0")}`;
+
+
+
+      const { data: name } = await useAsyncData("name", async () => {
+        const { data } = await supabase.from("dailyinputs").select("*").eq('date', formattedLocalDate);
+
+
+        this.todaysWorkout = data[0].workout
+      });
+
+    },
+    
   },
 });

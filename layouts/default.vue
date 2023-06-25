@@ -40,6 +40,8 @@ foodStore.getLog()
 const personalStore = usePersonalStore()
 personalStore.getPersonalInfo()
 personalStore.getWeightLog()
+personalStore.getTodaysWorkout()
+
 
 
 

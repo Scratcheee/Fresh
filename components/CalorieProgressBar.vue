@@ -1,5 +1,5 @@
 <template>
-    <div class="flex items-center flex-col bg-purple-400 ">
+    <div class="flex items-center flex-col  ">
         <div class="container">
 
             <div class="container__progressbars">
@@ -8,14 +8,16 @@
                     <svg class="progressbar__svg">
                         <circle cx="80" cy="80" r="70" class="progressbar__svg-circle circle-html "> </circle>
                     </svg>
-                    <span class="progressbar__text ">{{calCount}}</span>
+                    <span class="progressbar__text ">{{calCount + workout}}</span>
                     
                     
                 </div>
+                
 
 
             </div>
         </div>
+        <span class="text-white">remaining</span>
         <!-- <div class="flex flex-col w-full">
             <div class="flex justify-around">
             <p>0.25LBS Gained Yesterday</p>
@@ -32,7 +34,8 @@
 
 <script setup>
 defineProps({
-    calCount: String
+    calCount: String,
+    workout: String
 })
 let percentage = 30
 

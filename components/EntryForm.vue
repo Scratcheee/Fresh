@@ -11,7 +11,7 @@
       <div class="field">
         <label class="label">Calories</label>
         <div class="control ">
-          <input class="input" type="number" placeholder="Calories" v-model.number='calories' required>
+          <input class="input" type="number" placeholder="Calories" v-model.number='calories' required> 201 calories per cup
 
         </div>
       </div>
@@ -33,11 +33,12 @@
             <ActionButton type="button" text="Meal" class="w-20 md:w-1/4 btn " @click="type = 'meal'" />
             <ActionButton type="button" text="Snack" class="w-20 md:w-1/4 btn" @click="type = 'snack'" />
             <ActionButton type="button" text="Hydration" class="w-20 md:w-1/4 btn" @click="type = 'hydration'" />
-            {{ type }}
+            
 
 
 
           </div>
+          {{ type }}
 
 
         </div>
@@ -63,12 +64,13 @@
             <ActionButton type="button" text="1" class="w-1/5 btn" @click="hunger = 1" />
             <ActionButton type="button" text="2" class="w-1/5 btn" @click="hunger = 2" />
             <ActionButton type="button" text="3" class="w-1/5 btn" @click="hunger = 3" />
-            {{ hunger }}
+            
             
 
 
 
           </div>
+          {{ hunger }}
         </div>
       </div>
 
@@ -76,7 +78,7 @@
 
 
 
-      <ActionButton text="Add" type="submit" />
+      <ActionButton text="Add" type="submit" class="accent-button" />
 
     </div>
   </form>
@@ -140,7 +142,7 @@ select {
 }
 
 form {
-  background: #FFFFFF;
+  background: #e0e9f1;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
   border-radius: 10px;
   padding: 12px;
@@ -171,6 +173,13 @@ form {
 /* Add a background color on hover */
 .btn-group button:hover {
   background-color: #aa85e5;
+}
+.input {
+  background-color: #fff;
+}
+
+.accent-button {
+  background-color: #4b82a4;
 }
 
 </style>

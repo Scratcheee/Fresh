@@ -3,7 +3,9 @@
 @tailwind utilities;
 
 html {
-    background: linear-gradient(180deg,rgba(237,226,245,1) 0%, rgba(255,255,255,1) 100%);
+    /* background: linear-gradient(180deg,#ede3f5 0%, #ffffff 100%); */
+    background-image: url('/assets/images/layered-waves-haikei(2).svg');
+    background-size: cover;
     height: 100%;
     background-repeat: no-repeat;
     background-attachment: fixed;
