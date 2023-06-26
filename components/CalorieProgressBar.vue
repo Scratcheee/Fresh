@@ -34,8 +34,8 @@
 
 <script setup>
 defineProps({
-    calCount: String,
-    workout: String
+    calCount: Number,
+    workout: Number
 })
 let percentage = 30
 
