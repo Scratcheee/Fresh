@@ -57,7 +57,7 @@ export const useFoodLogStore = defineStore("foodLog", {
       console.log(`formattedLocalDate: ${formattedLocalDate}`)
 
       const { data: name } = await useAsyncData("name", async () => {
-        const { data } = await supabase.from("foodlog").select("*").eq('date', formattedLocalDate);
+        const { data } = await supabase.from("foodlog").select("*").eq('date', '2023-06-26');
 
 
         this.foodLog = data;

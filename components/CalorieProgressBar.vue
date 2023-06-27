@@ -1,32 +1,30 @@
 <template>
     <div class="flex items-center flex-col  ">
-        <div class="container">
+        <span class="text-white text-3xl">{{calCount + workout}}</span>
 
-            <div class="container__progressbars">
-
-                <div class="progressbar">
-                    <svg class="progressbar__svg">
-                        <circle cx="80" cy="80" r="70" class="progressbar__svg-circle circle-html "> </circle>
-                    </svg>
-                    <span class="progressbar__text ">{{calCount + workout}}</span>
-                    
-                    
-                </div>
-                
-
-
-            </div>
-        </div>
         <span class="text-white">remaining</span>
         <!-- <div class="flex flex-col w-full">
             <div class="flex justify-around">
-            <p>0.25LBS Gained Yesterday</p>
+            <p class="text-white">0.25LBS Gained Yesterday</p>
         </div>
         <div class="flex justify-around ">
-            <p class="bg-red-500">Worked Out</p>
-        <p class="bg-green-500">Ate Below Calories</p>
+            <p class="bg-red-500 text-white">Worked Out</p>
+        <p class="bg-green-500 text-white">Ate Below Calories</p>
         </div>
         </div> -->
+        <!-- <div class="flex">
+        <div class="flex flex-col m-3">
+            <span class="text-white mx-3">0.75 lbs lost yesterday</span>
+            <span class="text-white mx-3">10lbs lost yesterday</span>
+
+        </div>
+        <div class="flex flex-col m-3">
+            <span class="text-white bg-green-500 mb-1">Worked out</span>
+
+            <span class="text-white bg-green-500 ">Ate below calories</span>
+        </div>
+    </div>
+  -->
 
 
     </div>
