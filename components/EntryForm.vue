@@ -1,14 +1,14 @@
 <template>
   <form @submit.prevent="handleSubmit" ref="entry" class="">
-    <div class="mx-5 flex flex-col m-3">
-      <div class="field">
+    <div class=" flex flex-col m-3">
+      <div class="field flex">
         <label class="label">Food/Drink</label>
         <div class="control">
-          <input class="input" type="text" placeholder="Food / Drink Name" v-model="name" required>
+          <input class="input " type="text" placeholder="Food / Drink Name" v-model="name" required>
         </div>
       </div>
 
-      <div class="field">
+      <div class="field flex">
         <label class="label">Calories</label>
         <div class="control ">
           <input class="input" type="number" placeholder="Calories" v-model.number='calories' required> 201 calories per cup
@@ -17,7 +17,7 @@
       </div>
 
 
-      <div class="field ">
+      <div class="field flex ">
         <label class="label">Type</label>
         <div class="control ">
           <!-- <div class="select w-full">
@@ -30,9 +30,9 @@
             </div> -->
           <div class="btn-group flex justify-around">
 
-            <ActionButton type="button" text="Meal" class="w-20 md:w-1/4 btn " @click="type = 'meal'" />
-            <ActionButton type="button" text="Snack" class="w-20 md:w-1/4 btn" @click="type = 'snack'" />
-            <ActionButton type="button" text="Hydration" class="w-20 md:w-1/4 btn" @click="type = 'hydration'" />
+            <ActionButton type="button" text="Meal" class="w-18 m-1  md:w-1/4 btn " @click="type = 'meal'" />
+            <ActionButton type="button" text="Snack" class="w-18 m-1 md:w-1/4 btn" @click="type = 'snack'" />
+            <ActionButton type="button" text="Drink" class="w-18 m-1  md:w-1/4 btn" @click="type = 'hydration'" />
             
 
 
@@ -44,7 +44,7 @@
         </div>
       </div>
 
-      <div class="field">
+      <div class="field flex">
         <label class="label">Hunger</label>
         <div class="control">
           <!-- <div class="select w-full">
@@ -60,10 +60,10 @@
           </div> -->
           <div class="btn-group flex justify-around">
 
-            <ActionButton type="button" text="0" class="w-1/5 btn" @click="hunger = 0" />
-            <ActionButton type="button" text="1" class="w-1/5 btn" @click="hunger = 1" />
-            <ActionButton type="button" text="2" class="w-1/5 btn" @click="hunger = 2" />
-            <ActionButton type="button" text="3" class="w-1/5 btn" @click="hunger = 3" />
+            <ActionButton type="button" text="0" class="w-12 m-1 btn" @click="hunger = 0" />
+            <ActionButton type="button" text="1" class="w-12 m-1 btn" @click="hunger = 1" />
+            <ActionButton type="button" text="2" class="w-12 m-1 btn" @click="hunger = 2" />
+            <ActionButton type="button" text="3" class="w-12 m-1 btn" @click="hunger = 3" />
             
             
 

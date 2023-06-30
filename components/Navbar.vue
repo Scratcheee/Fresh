@@ -22,6 +22,7 @@
         </div>
       </DisclosurePanel>
     </Disclosure>
+    {{ formattedLocalDate }}
   </template>
   
   <script setup>
@@ -29,6 +30,24 @@
   import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline'
   const user = useSupabaseUser()
   const supabase = useSupabaseClient()
+
+  //Date test
+  const date = new Date();
+      // console.log(`date: ${date}`)
+      const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      // console.log(`userTimezone: ${userTimezone}`)
+      const localDate = date.toLocaleDateString("en-US", {
+        timeZone: userTimezone,
+      });
+      // console.log(`localDate: ${localDate}`)
+
+
+      const parts1 = localDate.split("/");
+      const formattedLocalDate = `${parts1[2]}-${parts1[0].padStart(
+        2,
+        "0"
+      )}-${parts1[1].padStart(2, "0")}`;
+      // console.log(formattedLocalDate)
 
   const logout = async () => {
     try {
