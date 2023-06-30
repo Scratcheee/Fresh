@@ -44,6 +44,12 @@ export const useFoodLogStore = defineStore("foodLog", {
       const userDate = new Date(date.getTime() - (offset*60*1000))
       const formattedLocalDate = userDate.toISOString().split('T')[0]
       console.log(formattedLocalDate)
+      // setTimeout(() => {
+      //   console.log("Delayed for 1 second.");
+      // }, 5000);
+
+      
+      
 
 
       const { data: name } = await useAsyncData("name", async () => {
