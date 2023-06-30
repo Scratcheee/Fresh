@@ -4,7 +4,8 @@
     
 
         <div>
-            <slot />
+            <slot/>
+
         </div>
     </div>
     <div class="fixed bottom-0 right-0 m-4 p-4 text-xs text-slate-300 ">
@@ -19,6 +20,7 @@ import { usePersonalStore } from '@/stores/personalInfoStore';
 // import { useUserStore } from '@/stores/userStore';
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
+let loaded = false
 // const userStore = useUserStore()
 const router = useRouter();
 
@@ -38,9 +40,12 @@ const logout = async () => {
 const foodStore = useFoodLogStore()
 const personalStore = usePersonalStore()
 
-setTimeout(() => {
+
     foodStore.getLog()
-}, 1000);
+    
+
+
+
 
 
 personalStore.getPersonalInfo()
