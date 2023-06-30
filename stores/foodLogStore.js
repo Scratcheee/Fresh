@@ -40,21 +40,11 @@ export const useFoodLogStore = defineStore("foodLog", {
     async getLog() {
       const supabase = useSupabaseClient();
       const date = new Date();
-      console.log(`date: ${date}`)
-      const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      console.log(`userTimezone: ${userTimezone}`)
-      const localDate = date.toLocaleDateString("en-US", {
-        timeZone: userTimezone,
-      });
-      console.log(`localDate: ${localDate}`)
-
-
-      const parts1 = localDate.split("/");
-      const formattedLocalDate = `${parts1[2]}-${parts1[0].padStart(
-        2,
-        "0"
-      )}-${parts1[1].padStart(2, "0")}`;
+      const offset = date.getTimezoneOffset()
+      const userDate = new Date(date.getTime() - (offset*60*1000))
+      const formattedLocalDate = userDate.toISOString().split('T')[0]
       console.log(formattedLocalDate)
+
 
       const { data: name } = await useAsyncData("name", async () => {
         const { data } = await supabase.from("foodlog").select("*").eq('date', formattedLocalDate);
