@@ -36,8 +36,13 @@ const logout = async () => {
     }
 }
 const foodStore = useFoodLogStore()
-foodStore.getLog()
 const personalStore = usePersonalStore()
+
+setTimeout(() => {
+    foodStore.getLog()
+}, 1000);
+
+
 personalStore.getPersonalInfo()
 personalStore.getWeightLog()
 personalStore.getTodaysWorkout()
