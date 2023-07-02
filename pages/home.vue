@@ -25,6 +25,7 @@
 <script setup>
 import { usePersonalStore } from '@/stores/personalInfoStore';
 import { useFoodLogStore } from '@/stores/foodLogStore';
+let firstLoad = true
 
 definePageMeta({
     middleware: ['auth']
@@ -35,6 +36,7 @@ onMounted(() => {
         if(!user.value) {
             navigateTo('/')
         }
+
     })
 })
 

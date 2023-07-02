@@ -1,38 +1,31 @@
 <template>
   <form @submit.prevent="handleSubmit" ref="entry" class="">
     <div class=" flex flex-col m-3">
-      <div class="field flex">
-        <label class="label">Food/Drink</label>
-        <div class="control">
-          <input class="input " type="text" placeholder="Food / Drink Name" v-model="name" required>
+      <div class="field flex justify-around sm:flex-col ">
+        <label class="label flex items-center">Food/Drink</label>
+        <div class="control  flex justify-around sm:justify-normal ">
+          <input class="input flex-auto ml-2 sm:w-full" type="text" placeholder="Food / Drink Name" v-model="name" required>
         </div>
       </div>
 
-      <div class="field flex">
-        <label class="label">Calories</label>
-        <div class="control ">
-          <input class="input" type="number" placeholder="Calories" v-model.number='calories' required> 201 calories per cup
+      <div class="field flex sm:flex-col justify-between content-center">
+        <label class="label flex  items-center">Calories</label>
+        <div class="control flex justify-around sm:justify-normal ">
+          <input class="input flex-auto ml-2  sm:w-full" type="number" placeholder="Calories" v-model.number='calories' required> 
 
         </div>
       </div>
 
 
-      <div class="field flex ">
-        <label class="label">Type</label>
+      <div class="field flex sm:flex-col justify-between ">
+        <label class="label flex items-center">Type</label>
         <div class="control ">
-          <!-- <div class="select w-full">
-              <select v-model="type" required class="w-full">
-                <option>Meal</option>
-                <option>Snack</option>
-                <option>Hydration</option>
 
-              </select>
-            </div> -->
           <div class="btn-group flex justify-around">
 
-            <ActionButton type="button" text="Meal" class="w-18 m-1  md:w-1/4 btn " @click="type = 'meal'" />
-            <ActionButton type="button" text="Snack" class="w-18 m-1 md:w-1/4 btn" @click="type = 'snack'" />
-            <ActionButton type="button" text="Drink" class="w-18 m-1  md:w-1/4 btn" @click="type = 'hydration'" />
+            <ActionButton type="button" text="Meal" class="flex-auto mx-1 btn " @click="type = 'meal'" />
+            <ActionButton type="button" text="Snack" class="flex-auto mx-1 btn" @click="type = 'snack'" />
+            <ActionButton type="button" text="Drink" class="flex-auto mx-1 btn" @click="type = 'hydration'" />
             
 
 
@@ -44,26 +37,16 @@
         </div>
       </div>
 
-      <div class="field flex">
-        <label class="label">Hunger</label>
-        <div class="control">
-          <!-- <div class="select w-full">
-            <select v-model.number="hunger" required class="w-full">
-              <option disabled>Select an option</option>
-              <option>0</option>
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
+      <div class="field flex sm:flex-col ">
+        <label class="label flex items-center  mr-1">Hunger</label>
+        <div class="control flex-1">
 
+          <div class="btn-group flex ">
 
-            </select>
-          </div> -->
-          <div class="btn-group flex justify-around">
-
-            <ActionButton type="button" text="0" class="w-12 m-1 btn" @click="hunger = 0" />
-            <ActionButton type="button" text="1" class="w-12 m-1 btn" @click="hunger = 1" />
-            <ActionButton type="button" text="2" class="w-12 m-1 btn" @click="hunger = 2" />
-            <ActionButton type="button" text="3" class="w-12 m-1 btn" @click="hunger = 3" />
+            <ActionButton type="button" text="0" class="flex-auto  m-1 btn" @click="hunger = 0" />
+            <ActionButton type="button" text="1" class="flex-auto  m-1 btn" @click="hunger = 1" />
+            <ActionButton type="button" text="2" class="flex-auto  m-1 btn" @click="hunger = 2" />
+            <ActionButton type="button" text="3" class="flex-auto  m-1 btn" @click="hunger = 3" />
             
             
 
