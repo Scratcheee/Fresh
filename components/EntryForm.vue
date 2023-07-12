@@ -23,15 +23,14 @@
 
           <div class="btn-group flex justify-around">
 
-            <ActionButton type="button" text="Meal" class="flex-auto mx-1 btn " @click="type = 'meal'" />
-            <ActionButton type="button" text="Snack" class="flex-auto mx-1 btn" @click="type = 'snack'" />
-            <ActionButton type="button" text="Drink" class="flex-auto mx-1 btn" @click="type = 'hydration'" />
+            <ActionButton type="button" text="Meal" class="flex-auto mx-1 btn selection-button  " :class="{active: mealChosen.meal}" @click="chooseMeal('meal')" />
+            <ActionButton type="button" text="Snack" class="flex-auto mx-1 btn selection-button" :class="{active: mealChosen.snack}" @click="chooseMeal('snack')"/>
+            <ActionButton type="button" text="Drink" class="flex-auto mx-1 btn selection-button" :class="{active: mealChosen.drink}" @click="chooseMeal('drink')" />
             
 
 
 
           </div>
-          {{ type }}
 
 
         </div>
@@ -43,17 +42,16 @@
 
           <div class="btn-group flex ">
 
-            <ActionButton type="button" text="0" class="flex-auto  m-1 btn" @click="hunger = 0" />
-            <ActionButton type="button" text="1" class="flex-auto  m-1 btn" @click="hunger = 1" />
-            <ActionButton type="button" text="2" class="flex-auto  m-1 btn" @click="hunger = 2" />
-            <ActionButton type="button" text="3" class="flex-auto  m-1 btn" @click="hunger = 3" />
+            <ActionButton type="button" text="0" class="flex-auto  m-1 btn selection-button" :class="{active: hungerChosen['0']}"  @click="chooseHunger('0')" />
+            <ActionButton type="button" text="1" class="flex-auto  m-1 btn selection-button" :class="{active: hungerChosen['1']}" @click="chooseHunger('1')" />
+            <ActionButton type="button" text="2" class="flex-auto  m-1 btn selection-button" :class="{active: hungerChosen['2']}" @click="chooseHunger('2')" />
+            <ActionButton type="button" text="3" class="flex-auto  m-1 btn selection-button" :class="{active: hungerChosen['3']}" @click="chooseHunger('3')" />
             
             
 
 
 
           </div>
-          {{ hunger }}
         </div>
       </div>
 
@@ -79,6 +77,8 @@ const name = ref('')
 const calories = ref()
 const type = ref()
 const hunger = ref()
+const mealChosen = ref({'meal': false, 'snack': false, 'drink': false})
+const hungerChosen = ref({'0': false, '1': false, '2': false, '3': false})
 
 
 const date = new Date();
@@ -87,13 +87,31 @@ const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 const localDate = date.toLocaleDateString('en-US', { timeZone: userTimezone });
 const localTime = date.toLocaleTimeString('en-US', { timeZone: userTimezone });
 
+const chooseMeal = (choice) => {
+  type.value = choice
+
+  for (let key in mealChosen.value) {
+    mealChosen.value[key] = key === choice;
+  }
+
+}
+
+const chooseHunger = (choice) => {
+  hunger.value = choice
+
+  for (let key in hungerChosen.value) {
+    hungerChosen.value[key] = key === choice;
+  }
+
+}
+
+
 
 
 
 const handleSubmit = (e) => {
-  // const timestamp = new Date()
-
-  foodStore.addEntry({
+  if(type.value && hunger.value >= 0) {
+    foodStore.addEntry({
     name: name.value,
     calories: calories.value,
     type: type.value,
@@ -107,6 +125,12 @@ const handleSubmit = (e) => {
   hunger.value = ""
   name.value = ""
   calories.value = ""
+  } else {
+    alert('Enter all fields')
+  }
+
+
+
 }
 
 
@@ -154,7 +178,7 @@ form {
 }
 
 /* Add a background color on hover */
-.btn-group button:hover {
+.selection-button {
   background-color: #aa85e5;
 }
 .input {
@@ -163,6 +187,9 @@ form {
 
 .accent-button {
   background-color: #4b82a4;
+}
+.active {
+  background: #9F46E4;
 }
 
 </style>

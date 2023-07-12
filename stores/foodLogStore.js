@@ -3,7 +3,8 @@ import { defineStore } from "pinia";
 export const useFoodLogStore = defineStore("foodLog", {
   state: () => ({
     foodLog: [],
-    meals: this.todaysMeals
+    meals: this.todaysMeals,
+    todaysEatenCals: 0
   }),
   getters: {
     // todaysMeals() {
@@ -41,7 +42,9 @@ export const useFoodLogStore = defineStore("foodLog", {
       const supabase = useSupabaseClient();
       const date = new Date();
       const offset = date.getTimezoneOffset()
+      console.log(offset)
       const userDate = new Date(date.getTime() - (offset*60*1000))
+      console.log(userDate)
       const formattedLocalDate = userDate.toISOString().split('T')[0]
       console.log(formattedLocalDate)
       // setTimeout(() => {
@@ -66,6 +69,8 @@ export const useFoodLogStore = defineStore("foodLog", {
 
     async addEntry(entry) {
       this.foodLog.push(entry);
+      this.todaysEatenCals = this.todaysEatenCals + entry.calories
+      console.log(this.todaysEatenCals)
       
       const supabase = useSupabaseClient();
 
