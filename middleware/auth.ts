@@ -4,8 +4,8 @@ export default defineNuxtRouteMiddleware((to) => {
     if (!user.value && to.path === '/home' || !user.value && to.path === '/setup') {
       console.log('navigating to login')
       navigateTo('/')
-    } else if (user.value && to.path === '/') {
-      navigateTo('home')
+    } else if (user.value && to.path === '/' ) {
+      navigateTo('/home')
     }
   })
   

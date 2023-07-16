@@ -1,76 +1,57 @@
 <template>
   <form @submit.prevent="handleSubmit" ref="entry" class="">
     <div class=" flex flex-col m-3">
-      <div class="field flex">
-        <label class="label">Food/Drink</label>
-        <div class="control">
-          <input class="input " type="text" placeholder="Food / Drink Name" v-model="name" required>
+      <div class="field flex justify-around sm:flex-col ">
+        <label class="label flex items-center">Food/Drink</label>
+        <div class="control  flex justify-around sm:justify-normal ">
+          <input class="input flex-auto ml-2 sm:w-full" type="text" placeholder="Food / Drink Name" v-model="name" required>
         </div>
       </div>
 
-      <div class="field flex">
-        <label class="label">Calories</label>
-        <div class="control ">
-          <input class="input" type="number" placeholder="Calories" v-model.number='calories' required> 201 calories per cup
+      <div class="field flex sm:flex-col justify-between content-center">
+        <label class="label flex  items-center">Calories</label>
+        <div class="control flex justify-around sm:justify-normal ">
+          <input class="input flex-auto ml-2  sm:w-full" type="number" placeholder="Calories" v-model.number='calories' required> 
 
         </div>
       </div>
 
 
-      <div class="field flex ">
-        <label class="label">Type</label>
+      <div class="field flex sm:flex-col justify-between ">
+        <label class="label flex items-center">Type</label>
         <div class="control ">
-          <!-- <div class="select w-full">
-              <select v-model="type" required class="w-full">
-                <option>Meal</option>
-                <option>Snack</option>
-                <option>Hydration</option>
 
-              </select>
-            </div> -->
           <div class="btn-group flex justify-around">
 
-            <ActionButton type="button" text="Meal" class="w-18 m-1  md:w-1/4 btn " @click="type = 'meal'" />
-            <ActionButton type="button" text="Snack" class="w-18 m-1 md:w-1/4 btn" @click="type = 'snack'" />
-            <ActionButton type="button" text="Drink" class="w-18 m-1  md:w-1/4 btn" @click="type = 'hydration'" />
+            <ActionButton type="button" text="Meal" class="flex-auto mx-1 btn selection-button  " :class="{active: mealChosen.meal}" @click="chooseMeal('meal')" />
+            <ActionButton type="button" text="Snack" class="flex-auto mx-1 btn selection-button" :class="{active: mealChosen.snack}" @click="chooseMeal('snack')"/>
+            <ActionButton type="button" text="Drink" class="flex-auto mx-1 btn selection-button" :class="{active: mealChosen.drink}" @click="chooseMeal('drink')" />
             
 
 
 
           </div>
-          {{ type }}
 
 
         </div>
       </div>
 
-      <div class="field flex">
-        <label class="label">Hunger</label>
-        <div class="control">
-          <!-- <div class="select w-full">
-            <select v-model.number="hunger" required class="w-full">
-              <option disabled>Select an option</option>
-              <option>0</option>
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
+      <div class="field flex sm:flex-col ">
+        <label class="label flex items-center  mr-1">Hunger</label>
+        <div class="control flex-1">
 
+          <div class="btn-group flex ">
 
-            </select>
-          </div> -->
-          <div class="btn-group flex justify-around">
-
-            <ActionButton type="button" text="0" class="w-12 m-1 btn" @click="hunger = 0" />
-            <ActionButton type="button" text="1" class="w-12 m-1 btn" @click="hunger = 1" />
-            <ActionButton type="button" text="2" class="w-12 m-1 btn" @click="hunger = 2" />
-            <ActionButton type="button" text="3" class="w-12 m-1 btn" @click="hunger = 3" />
+            <ActionButton type="button" text="0" class="flex-auto  m-1 btn selection-button" :class="{active: hungerChosen['0']}"  @click="chooseHunger('0')" />
+            <ActionButton type="button" text="1" class="flex-auto  m-1 btn selection-button" :class="{active: hungerChosen['1']}" @click="chooseHunger('1')" />
+            <ActionButton type="button" text="2" class="flex-auto  m-1 btn selection-button" :class="{active: hungerChosen['2']}" @click="chooseHunger('2')" />
+            <ActionButton type="button" text="3" class="flex-auto  m-1 btn selection-button" :class="{active: hungerChosen['3']}" @click="chooseHunger('3')" />
             
             
 
 
 
           </div>
-          {{ hunger }}
         </div>
       </div>
 
@@ -96,6 +77,8 @@ const name = ref('')
 const calories = ref()
 const type = ref()
 const hunger = ref()
+const mealChosen = ref({'meal': false, 'snack': false, 'drink': false})
+const hungerChosen = ref({'0': false, '1': false, '2': false, '3': false})
 
 
 const date = new Date();
@@ -104,13 +87,31 @@ const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 const localDate = date.toLocaleDateString('en-US', { timeZone: userTimezone });
 const localTime = date.toLocaleTimeString('en-US', { timeZone: userTimezone });
 
+const chooseMeal = (choice) => {
+  type.value = choice
+
+  for (let key in mealChosen.value) {
+    mealChosen.value[key] = key === choice;
+  }
+
+}
+
+const chooseHunger = (choice) => {
+  hunger.value = choice
+
+  for (let key in hungerChosen.value) {
+    hungerChosen.value[key] = key === choice;
+  }
+
+}
+
+
 
 
 
 const handleSubmit = (e) => {
-  // const timestamp = new Date()
-
-  foodStore.addEntry({
+  if(type.value && hunger.value >= 0) {
+    foodStore.addEntry({
     name: name.value,
     calories: calories.value,
     type: type.value,
@@ -124,6 +125,12 @@ const handleSubmit = (e) => {
   hunger.value = ""
   name.value = ""
   calories.value = ""
+  } else {
+    alert('Enter all fields')
+  }
+
+
+
 }
 
 
@@ -171,7 +178,7 @@ form {
 }
 
 /* Add a background color on hover */
-.btn-group button:hover {
+.selection-button {
   background-color: #aa85e5;
 }
 .input {
@@ -180,6 +187,9 @@ form {
 
 .accent-button {
   background-color: #4b82a4;
+}
+.active {
+  background: #9F46E4;
 }
 
 </style>

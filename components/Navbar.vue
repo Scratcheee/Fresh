@@ -22,7 +22,6 @@
         </div>
       </DisclosurePanel>
     </Disclosure>
-    {{ formattedLocalDate }}
   </template>
   
   <script setup>
