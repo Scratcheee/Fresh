@@ -7,6 +7,7 @@ export const usePersonalStore = defineStore("personalInfo", {
     personalInfo: [],
     workoutCals: 0,
     todaysWorkout: 0,
+    todaysData: [{ weight: 240, workout: 0 }],
   }),
   actions: {
     async getPersonalInfo() {
@@ -29,9 +30,7 @@ export const usePersonalStore = defineStore("personalInfo", {
     },
     async logDaily(entry) {
       const today = new Date();
-
       const supabase = useSupabaseClient();
-      console.log(entry.daily_workout);
 
       const currentDate = new Date().toISOString().substring(0, 10); // get current date in ISO format without the time
 
@@ -93,14 +92,15 @@ export const usePersonalStore = defineStore("personalInfo", {
           .eq("user_id", this.personalInfo[0].user_id);
       });
     },
-    async getTodaysWorkout() {
+    async getTodaysData() {
       const supabase = useSupabaseClient();
+      const userStore = useSupabaseUser();
+
       const date = new Date();
       const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
       const localDate = date.toLocaleDateString("en-US", {
         timeZone: userTimezone,
       });
-
 
       const parts1 = localDate.split("/");
       const formattedLocalDate = `${parts1[2]}-${parts1[0].padStart(
@@ -108,16 +108,26 @@ export const usePersonalStore = defineStore("personalInfo", {
         "0"
       )}-${parts1[1].padStart(2, "0")}`;
 
-
-
       const { data: name } = await useAsyncData("name", async () => {
-        const { data } = await supabase.from("dailyinputs").select("*").eq('date', formattedLocalDate);
+        const { data, count } = await supabase
+          .from("dailyinputs")
+          .select("*", { count: "exact" })
+          .eq("date", formattedLocalDate);
 
-
-        this.todaysWorkout = data[0].workout
+        if (count) {
+          this.todaysData = data;
+        } else {
+          const { data, error } = await supabase.from("dailyinputs").insert([
+            {
+              date: localDate,
+              weight: 0,
+              user_id: userStore.value.id,
+              workout: 0,
+            },
+          ]);
+          this.todaysData = data;
+        }
       });
-
     },
-    
   },
 });

@@ -1,15 +1,12 @@
 <template>
     <Navbar />
     <div>
-    
-
         <div>
-            <slot/>
-
+            <slot />
         </div>
     </div>
     <div class="fixed bottom-0 right-0 m-4 p-4 text-xs text-slate-300 ">
-    version 0.0.6
+        version 0.0.7
 
     </div>
 </template>
@@ -17,14 +14,10 @@
 <script setup>
 import { useFoodLogStore } from '@/stores/foodLogStore';
 import { usePersonalStore } from '@/stores/personalInfoStore';
-// import { useUserStore } from '@/stores/userStore';
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 let loaded = false
-// const userStore = useUserStore()
-const router = useRouter();
 
-const appReady = ref(null)
 
 //Logout function
 const logout = async () => {
@@ -39,22 +32,10 @@ const logout = async () => {
 }
 const foodStore = useFoodLogStore()
 const personalStore = usePersonalStore()
-
-
-    foodStore.getLog()
-    
-
-
-
-
-
+foodStore.getLog()
 personalStore.getPersonalInfo()
 personalStore.getWeightLog()
-personalStore.getTodaysWorkout()
-
-
-
-
+personalStore.getTodaysData()
 </script>
 
 <style lang="scss" scoped></style>
