@@ -9,8 +9,8 @@
                             <div class="relative w-full">
                                 <input type="text"
                                     class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-lg border-l-gray-100 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
-                                    placeholder="Weight" required>
-                                <button type="submit"
+                                    placeholder="Weight" v-model="currentWeight" required>
+                                <button type="button" @click="logWeight" 
                                     class="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
                             </div>
                         </div>
@@ -48,7 +48,7 @@ const personalStore = usePersonalStore()
 const foodStore = useFoodLogStore()
 const userStore = useSupabaseUser()
 
-const currentWeight = ref('')
+const currentWeight = ref()
 const dailyWorkout = ref(0)
 const date = new Date();
 const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -61,22 +61,24 @@ const logged = ref(false)
 
 const calculateBMR = (info) => {
     if (info.sex === 'Male') {
-        return (4.536 * personalStore.weightLog[personalStore.weightLog.length - 1].weight) + (15.88 * info.height_in) - (5 * info.age) + 5
+        return (4.536 * currentWeight.value) + (15.88 * info.height_in) - (5 * info.age) + 5
     } else if (sex.value === 'Female') {
-        return (4.536 * personalStore.weightLog[personalStore.weightLog.length - 1].weight) + (15.88 * info.height_in) - (5 * info.age) - 161
+        return (4.536 * currentWeight.value) + (15.88 * info.height_in) - (5 * info.age) - 161
     }
 }
 const calculateTotalCal = (info) => {
+
     const bmr = calculateBMR(info)
+    console.log(bmr)
     return Math.floor(bmr) * info.activity_level + (info.weekly_change * 500)
 }
 
-const logDailyUpdate = () => {
-    personalStore.logDaily({
+const logWeight = () => {
+    if(currentWeight.value > 0) {
+        personalStore.logNewWeight({
         date: localDate,
         weight: currentWeight.value,
         user_id: userStore.value.id,
-        workout: parseFloat(dailyWorkout.value.number)
 
     })
     personalStore.updateDailyCals({
@@ -89,6 +91,11 @@ const logDailyUpdate = () => {
         logged.value = !logged.value
 
     }, 2500);
+
+    } else {
+        alert('Please enter a valid weight.');
+    }
+
 
 }
 </script>

@@ -28,7 +28,7 @@ export const usePersonalStore = defineStore("personalInfo", {
         this.weightLog = data;
       });
     },
-    async logDaily(entry) {
+    async logNewWeight(entry) {
       const today = new Date();
       const supabase = useSupabaseClient();
 
@@ -42,7 +42,7 @@ export const usePersonalStore = defineStore("personalInfo", {
         console.log(entry);
         const { data, error } = await supabase
           .from("dailyinputs")
-          .update({ weight: entry.weight, workout: entry.workout })
+          .update({ weight: entry.weight,})
           .eq("id", result.id);
       } else {
         const { data: name } = await useAsyncData("name", async () => {
@@ -123,6 +123,7 @@ export const usePersonalStore = defineStore("personalInfo", {
               weight: 0,
               user_id: userStore.value.id,
               workout: 0,
+              calorie_count: 0,
             },
           ]);
           this.todaysData = data;
