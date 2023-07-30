@@ -51,10 +51,13 @@
 <script setup>
 
 import { useFoodLogStore } from '@/stores/foodLogStore';
+import { usePersonalStore } from '~/stores/personalInfoStore';
 
 
 const foodStore = useFoodLogStore()
 const userStore = useSupabaseUser()
+
+const personalStore = usePersonalStore()
 
 const name = ref('')
 const calories = ref()
@@ -78,6 +81,7 @@ const chooseMeal = (choice) => {
   for (let key in mealChosen.value) {
     mealChosen.value[key] = key === choice;
   }
+  console.log(mealChosen.value)
 }
 
 const chooseHunger = (choice) => {
@@ -99,6 +103,7 @@ const handleSubmit = (e) => {
       time: localTime,
       user_id: userStore.value.id
     })
+    personalStore.logCalories({calories: calories.value})
 
     type.value = ""
     hunger.value = ""

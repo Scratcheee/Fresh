@@ -4,18 +4,15 @@ export const useFoodLogStore = defineStore("foodLog", {
   state: () => ({
     foodLog: [],
     meals: this.todaysMeals,
-    todaysEatenCals: 0
+    todaysEatenCals: 0,
+    currentDate: new Date(new Date().getTime() - (new Date().getTimezoneOffset()*60*1000)).toISOString().slice(0, 10),
   }),
   actions: {
     async getLog() {
       const supabase = useSupabaseClient();
-      const date = new Date();
-      const offset = date.getTimezoneOffset()
-      const userDate = new Date(date.getTime() - (offset*60*1000))
-      const formattedLocalDate = userDate.toISOString().split('T')[0]
 
       const { data: name } = await useAsyncData("name", async () => {
-        const { data } = await supabase.from("foodlog").select("*").eq('date', formattedLocalDate);
+        const { data } = await supabase.from("foodlog").select("*").eq('date', this.currentDate);
         this.foodLog = data;
       });
     },
