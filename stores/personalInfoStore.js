@@ -3,10 +3,14 @@ import { defineStore } from "pinia";
 export const usePersonalStore = defineStore("personalInfo", {
   state: () => ({
     calorieGoal: 0,
+    calorieCount: 0,
     weightLog: [],
     personalInfo: [],
     workoutCals: 0,
     todaysWorkout: 0,
+    todaysData: [{ weight: 0, workout: 0, calorie_count: 0 }],
+    test: 'null',
+    currentDate: new Date(new Date().getTime() - (new Date().getTimezoneOffset()*60*1000)).toISOString().slice(0, 10),
   }),
   actions: {
     async getPersonalInfo() {
@@ -14,36 +18,72 @@ export const usePersonalStore = defineStore("personalInfo", {
       const { data: name } = await useAsyncData("name", async () => {
         const { data } = await supabase.from("userdata").select("*");
 
+
         this.personalInfo = data;
         this.calorieGoal = data[0].calorie_goal;
         this.workoutCals = data[0].workout_cal;
+
       });
     },
     async getWeightLog() {
       const supabase = useSupabaseClient();
       const { data: name } = await useAsyncData("name", async () => {
         const { data } = await supabase.from("dailyinputs").select("*");
-
+        this.todaysEatenCals = data.calorie_count
         this.weightLog = data;
+
       });
     },
-    async logDaily(entry) {
-      const today = new Date();
-
+    async logNewWeight(entry) {
       const supabase = useSupabaseClient();
-      console.log(entry.daily_workout);
-
-      const currentDate = new Date().toISOString().substring(0, 10); // get current date in ISO format without the time
-
       const result = this.weightLog.find((obj) =>
-        obj.created_at.startsWith(currentDate)
+        obj.created_at.startsWith(this.currentDate)
+      );
+
+      if (result) {
+
+        const { data, error } = await supabase
+          .from("dailyinputs")
+          .update({ weight: entry.weight })
+          .eq("id", result.id);
+      } else {
+        const { data: name } = await useAsyncData("name", async () => {
+          const { data } = await supabase.from("dailyinputs").insert(entry);
+        });
+      }
+    },
+    async logWorkout(entry) {
+      const supabase = useSupabaseClient();
+      const result = this.weightLog.find((obj) =>
+      obj.date === this.currentDate
       );
 
       if (result) {
         console.log(entry);
         const { data, error } = await supabase
           .from("dailyinputs")
-          .update({ weight: entry.weight, workout: entry.workout })
+          .update({ workout: entry.workout })
+          .eq("id", result.id);
+      } else {
+        const { data: name } = await useAsyncData("name", async () => {
+          const { data } = await supabase.from("dailyinputs").insert(entry);
+        });
+      }
+    },
+    async logCalories(entry) {
+      const supabase = useSupabaseClient();
+      console.log(this.weightLog)
+      const result = this.weightLog.find((obj) =>
+        obj.date === this.currentDate
+      );
+
+      this.todaysData[0].calorie_count = this.todaysData[0].calorie_count + entry.calories
+
+      if (result) {
+        console.log(entry);
+        const { data, error } = await supabase
+          .from("dailyinputs")
+          .update({ calorie_count: this.todaysData[0].calorie_count })
           .eq("id", result.id);
       } else {
         const { data: name } = await useAsyncData("name", async () => {
@@ -93,31 +133,36 @@ export const usePersonalStore = defineStore("personalInfo", {
           .eq("user_id", this.personalInfo[0].user_id);
       });
     },
-    async getTodaysWorkout() {
+    async getTodaysData() {
       const supabase = useSupabaseClient();
-      const date = new Date();
-      const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      const localDate = date.toLocaleDateString("en-US", {
-        timeZone: userTimezone,
-      });
-
-
-      const parts1 = localDate.split("/");
-      const formattedLocalDate = `${parts1[2]}-${parts1[0].padStart(
-        2,
-        "0"
-      )}-${parts1[1].padStart(2, "0")}`;
-
-
+      const userStore = useSupabaseUser();
 
       const { data: name } = await useAsyncData("name", async () => {
-        const { data } = await supabase.from("dailyinputs").select("*").eq('date', formattedLocalDate);
+        const { data, count } = await supabase
+          .from("dailyinputs")
+          .select("*", { count: "exact" })
+          .eq("date", this.currentDate);
 
-
-        this.todaysWorkout = data[0].workout
+        if (count) {
+          this.todaysData = data;
+          this.test = 'data present'
+        } else {
+          this.todaysData = [{ weight: 0, workout: 0, calorie_count: 0 }]
+          console.log('fired')
+  
+          const { data, error } = await supabase.from("dailyinputs").insert(
+            {
+              date: this.currentDate,
+              weight: 0,
+              user_id: userStore.value.id,
+              workout: 0,
+              calorie_count: 0,
+            },
+          );
+          this.todaysData = data;
+          this.test = 'created data'
+        }
       });
-
     },
-    
   },
 });

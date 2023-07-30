@@ -26,7 +26,7 @@
                 <div class="field">
                     <label class="label">Current Weight</label>
                     <div class="control">
-                        <input class="input" type="number" placeholder="Text input" v-model="currentWeight" required>
+                        <input class="input" type="number" placeholder="Text input" v-model="currentWeight" step="0.01" required>
                     </div>
                 </div>
 
