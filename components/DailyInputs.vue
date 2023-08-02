@@ -47,7 +47,7 @@ const foodStore = useFoodLogStore()
 const userStore = useSupabaseUser()
 const workoutChosen = ref({ 'half': false, 'full': false })
 
-const currentWeight = ref(personalStore.todaysData[0].weight)
+// const currentWeight = ref(personalStore.todaysData[0].weight)
 const dailyWorkout = ref(0)
 const date = new Date();
 const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;

@@ -114,6 +114,7 @@
 
 
     </div>
+    {{ personalStore.personalInfo[0].age }}
 </form>
 </template>
 
@@ -124,15 +125,15 @@ const userStore = useSupabaseUser()
 const personalStore = usePersonalStore()
 
 
-const startingDate = ref('')
-const sex = ref('')
+const startingDate = ref(personalStore.personalInfo[0].starting_date)
+const sex = ref(personalStore.personalInfo[0].sex)
 const currentWeight = ref('')
 const goalWeight = ref('')
 const heightIn = ref('')
 const heightFt = ref('')
 const weeklyChange = ref('')
 const activity = ref('')
-const age = ref('')
+const age = ref(personalStore.personalInfo[0].age )
 const workout_cal = ref('')
 let showBmr = ref(false)
 

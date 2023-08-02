@@ -3,13 +3,11 @@ import { defineStore } from "pinia";
 export const usePersonalStore = defineStore("personalInfo", {
   state: () => ({
     calorieGoal: 0,
-    calorieCount: 0,
+    todaysCalories: 0,
     weightLog: [],
     personalInfo: [],
     workoutCals: 0,
     todaysWorkout: 0,
-    todaysData: [{ weight: 0, workout: 0, calorie_count: 0 }],
-    test: 'null',
     currentDate: new Date(new Date().getTime() - (new Date().getTimezoneOffset()*60*1000)).toISOString().slice(0, 10),
   }),
   actions: {
@@ -77,13 +75,13 @@ export const usePersonalStore = defineStore("personalInfo", {
         obj.date === this.currentDate
       );
 
-      this.todaysData[0].calorie_count = this.todaysData[0].calorie_count + entry.calories
+      this.todaysCalories = this.todaysCalories + entry.calories
 
       if (result) {
         console.log(entry);
         const { data, error } = await supabase
           .from("dailyinputs")
-          .update({ calorie_count: this.todaysData[0].calorie_count })
+          .update({ calorie_count: this.todaysCalories })
           .eq("id", result.id);
       } else {
         const { data: name } = await useAsyncData("name", async () => {
@@ -144,11 +142,11 @@ export const usePersonalStore = defineStore("personalInfo", {
           .eq("date", this.currentDate);
 
         if (count) {
-          this.todaysData = data;
-          this.test = 'data present'
+      
+          this.todaysCalories = data[0].calorie_count
+          this.todaysWorkout = data[0].workout
         } else {
-          this.todaysData = [{ weight: 0, workout: 0, calorie_count: 0 }]
-          console.log('fired')
+      
   
           const { data, error } = await supabase.from("dailyinputs").insert(
             {
@@ -159,8 +157,7 @@ export const usePersonalStore = defineStore("personalInfo", {
               calorie_count: 0,
             },
           );
-          this.todaysData = data;
-          this.test = 'created data'
+     
         }
       });
     },
