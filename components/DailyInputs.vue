@@ -47,14 +47,14 @@ const foodStore = useFoodLogStore()
 const userStore = useSupabaseUser()
 const workoutChosen = ref({ 'half': false, 'full': false })
 
-// const currentWeight = ref(personalStore.todaysData[0].weight)
+const currentWeight = ref(personalStore.todaysWeight)
 const dailyWorkout = ref(0)
 const date = new Date();
 const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 const localDate = date.toLocaleDateString('en-US', { timeZone: userTimezone });
 const remainingCal = Math.abs(personalStore.calorieGoal - foodStore.todaysCals)
-const workout = personalStore.weightLog[personalStore.weightLog.length - 1].workout
-const workoutCal = personalStore.personalInfo[0].workout_cal
+// const workout = personalStore.weightLog[personalStore.weightLog.length - 1].workout
+// const workoutCal = personalStore.personalInfo[0].workout_cal
 const logged = ref(false)
 
 const chooseWorkout = (choice) => {

@@ -8,6 +8,7 @@ export const usePersonalStore = defineStore("personalInfo", {
     personalInfo: [],
     workoutCals: 0,
     todaysWorkout: 0,
+    todaysWeight: 0,
     currentDate: new Date(new Date().getTime() - (new Date().getTimezoneOffset()*60*1000)).toISOString().slice(0, 10),
   }),
   actions: {
@@ -145,6 +146,8 @@ export const usePersonalStore = defineStore("personalInfo", {
       
           this.todaysCalories = data[0].calorie_count
           this.todaysWorkout = data[0].workout
+          this.todaysWeight = data[0].weight
+
         } else {
       
   
