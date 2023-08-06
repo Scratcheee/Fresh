@@ -4,7 +4,8 @@
         <DailyInputs />
         <EntryForm />
         <DailyLog :foodLog="foodStore.foodLog" />
-        {{ personalStore.todaysData[0].calorie_count }}
+        <!-- {{ personalStore.todaysData[0].calorie_count }} -->
+        {{ personalStore.todaysCalories }}
 
 
     </div>
@@ -18,9 +19,9 @@ const personalStore = usePersonalStore()
 const foodStore = useFoodLogStore()
 const calGoal = ref(personalStore.calorieGoal)
 const totalCal = foodStore.foodLog.reduce((total, item) => total + item.calories, 0);
-const remainingCal = ref(personalStore.todaysData.calorie_count)
+// const remainingCal = ref(personalStore.todaysData.calorie_count)
 const workout = personalStore.workoutCals * personalStore.todaysWorkout
-console.log(personalStore.todaysData[0].calorie_count)
+// console.log(personalStore.todaysData[0].calorie_count)
 
 </script>
 

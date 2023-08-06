@@ -32,10 +32,18 @@ const logout = async () => {
 }
 const foodStore = useFoodLogStore()
 const personalStore = usePersonalStore()
-personalStore.getTodaysData()
-foodStore.getLog()
 personalStore.getPersonalInfo()
-personalStore.getWeightLog()
+personalStore.getTodaysData()
+
+
+setTimeout(() => {
+    foodStore.getLog()
+    personalStore.getWeightLog()
+
+}, "1000");
+
+
+
 </script>
 
 <style lang="scss" scoped></style>
