@@ -1,5 +1,5 @@
 <template>
-    <div class="flex justify-center gap-8   ">
+    <div class="flex justify-center gap-1   ">
         <div class="flex flex-col items-center"> 
             <span class="text-white text-3xl">{{ calGoal }}</span>
             <span class="text-white">Goal</span>
