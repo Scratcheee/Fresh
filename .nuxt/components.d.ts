@@ -3,6 +3,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     'ActionButton': typeof import("../components/ActionButton.vue")['default']
     'Auth': typeof import("../components/Auth.vue")['default']
+    'BottomNav': typeof import("../components/BottomNav.vue")['default']
     'CalorieProgressBar': typeof import("../components/CalorieProgressBar.vue")['default']
     'DailyCard': typeof import("../components/DailyCard.vue")['default']
     'DailyInputs': typeof import("../components/DailyInputs.vue")['default']
@@ -32,6 +33,7 @@ declare module 'vue' {
     'Body': typeof import("../node_modules/nuxt/dist/head/runtime/components")['Body']
     'LazyActionButton': typeof import("../components/ActionButton.vue")['default']
     'LazyAuth': typeof import("../components/Auth.vue")['default']
+    'LazyBottomNav': typeof import("../components/BottomNav.vue")['default']
     'LazyCalorieProgressBar': typeof import("../components/CalorieProgressBar.vue")['default']
     'LazyDailyCard': typeof import("../components/DailyCard.vue")['default']
     'LazyDailyInputs': typeof import("../components/DailyInputs.vue")['default']
@@ -64,6 +66,7 @@ declare module 'vue' {
 
 export const ActionButton: typeof import("../components/ActionButton.vue")['default']
 export const Auth: typeof import("../components/Auth.vue")['default']
+export const BottomNav: typeof import("../components/BottomNav.vue")['default']
 export const CalorieProgressBar: typeof import("../components/CalorieProgressBar.vue")['default']
 export const DailyCard: typeof import("../components/DailyCard.vue")['default']
 export const DailyInputs: typeof import("../components/DailyInputs.vue")['default']
@@ -93,6 +96,7 @@ export const Html: typeof import("../node_modules/nuxt/dist/head/runtime/compone
 export const Body: typeof import("../node_modules/nuxt/dist/head/runtime/components")['Body']
 export const LazyActionButton: typeof import("../components/ActionButton.vue")['default']
 export const LazyAuth: typeof import("../components/Auth.vue")['default']
+export const LazyBottomNav: typeof import("../components/BottomNav.vue")['default']
 export const LazyCalorieProgressBar: typeof import("../components/CalorieProgressBar.vue")['default']
 export const LazyDailyCard: typeof import("../components/DailyCard.vue")['default']
 export const LazyDailyInputs: typeof import("../components/DailyInputs.vue")['default']

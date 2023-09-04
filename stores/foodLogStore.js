@@ -12,7 +12,7 @@ export const useFoodLogStore = defineStore("foodLog", {
       const supabase = useSupabaseClient();
 
       const { data: name } = await useAsyncData("name", async () => {
-        const { data } = await supabase.from("foodlog").select("*").eq('date', this.currentDate);
+        const { data } = await supabase.from("foodlog").select("*")
         this.foodLog = data;
       });
     },

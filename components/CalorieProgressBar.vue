@@ -1,9 +1,28 @@
 <template>
-    <div class="flex items-center flex-col  ">
-        <span class="text-white text-3xl">{{calGoal - personalStore.todaysCalories + workout}}</span>
-        <span class="text-white">remaining</span>
-</div>
+    <div class="flex justify-center gap-8   ">
+        <div class="flex flex-col items-center"> 
+            <span class="text-white text-3xl">{{ calGoal }}</span>
+            <span class="text-white">Goal</span>
+        </div>
+        <span class="text-white text-3xl">-</span>
 
+        <div class="flex flex-col items-center"> 
+            <span class="text-white text-3xl">{{ todaysCals }}</span>
+            <span class="text-white">Current</span>
+        </div>
+        <span class="text-white text-3xl">=</span>
+
+        <div class="flex flex-col items-center"> 
+            <span class="text-white text-3xl">{{ calGoal - personalStore.todaysCalories + workout }}</span>
+            <span class="text-white">remaining</span>
+        </div>
+
+
+
+
+
+
+    </div>
 </template>
 
 <script setup>
@@ -26,5 +45,4 @@ const workout = personalStore.workoutCals * personalStore.todaysWorkout
 // console.log(personalStore.todaysData[0].workout)
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

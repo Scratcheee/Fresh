@@ -1,5 +1,5 @@
 <template>
-    <Navbar />
+    <!-- <Navbar /> -->
     <div>
         <div>
             <slot />
@@ -9,6 +9,7 @@
         version 0.0.7
 
     </div>
+    <BottomNav />
 </template>
 
 <script setup>
@@ -34,13 +35,9 @@ const foodStore = useFoodLogStore()
 const personalStore = usePersonalStore()
 personalStore.getPersonalInfo()
 personalStore.getTodaysData()
+foodStore.getLog()
+personalStore.getWeightLog()
 
-
-setTimeout(() => {
-    foodStore.getLog()
-    personalStore.getWeightLog()
-
-}, "1000");
 
 
 
