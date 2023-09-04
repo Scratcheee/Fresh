@@ -1,4 +1,6 @@
 <template>
+
+  
   <form @submit.prevent="handleSubmit" ref="entry" class="">
     <div class=" flex flex-col m-3">
       <div class="field flex justify-around sm:flex-col ">
@@ -65,6 +67,8 @@ const type = ref()
 const hunger = ref()
 const mealChosen = ref({ 'meal': false, 'snack': false, 'drink': false })
 const hungerChosen = ref({ '0': false, '1': false, '2': false, '3': false })
+
+
 
 
 const date = new Date();

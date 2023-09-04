@@ -125,15 +125,15 @@ const userStore = useSupabaseUser()
 const personalStore = usePersonalStore()
 
 
-const startingDate = ref(personalStore.personalInfo[0].starting_date)
-const sex = ref(personalStore.personalInfo[0].sex)
+const startingDate = ref('')
+const sex = ref('')
 const currentWeight = ref('')
 const goalWeight = ref('')
 const heightIn = ref('')
 const heightFt = ref('')
 const weeklyChange = ref('')
 const activity = ref('')
-const age = ref(personalStore.personalInfo[0].age )
+const age = ref('')
 const workout_cal = ref('')
 let showBmr = ref(false)
 
