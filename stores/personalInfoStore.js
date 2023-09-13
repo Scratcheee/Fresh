@@ -9,7 +9,12 @@ export const usePersonalStore = defineStore("personalInfo", {
     workoutCals: 0,
     todaysWorkout: 0,
     todaysWeight: 0,
-    currentDate: new Date(new Date().getTime() - (new Date().getTimezoneOffset()*60*1000)).toISOString().slice(0, 10),
+    dailyInputs: [],
+    currentDate: new Date(
+      new Date().getTime() - new Date().getTimezoneOffset() * 60 * 1000
+    )
+      .toISOString()
+      .slice(0, 10),
   }),
   actions: {
     async getPersonalInfo() {
@@ -17,20 +22,17 @@ export const usePersonalStore = defineStore("personalInfo", {
       const { data: name } = await useAsyncData("name", async () => {
         const { data } = await supabase.from("userdata").select("*");
 
-
         this.personalInfo = data;
         this.calorieGoal = data[0].calorie_goal;
         this.workoutCals = data[0].workout_cal;
-
       });
     },
     async getWeightLog() {
       const supabase = useSupabaseClient();
       const { data: name } = await useAsyncData("name", async () => {
         const { data } = await supabase.from("dailyinputs").select("*");
-        this.todaysEatenCals = data.calorie_count
+        this.todaysEatenCals = data.calorie_count;
         this.weightLog = data;
-
       });
     },
     async logNewWeight(entry) {
@@ -40,7 +42,6 @@ export const usePersonalStore = defineStore("personalInfo", {
       );
 
       if (result) {
-
         const { data, error } = await supabase
           .from("dailyinputs")
           .update({ weight: entry.weight })
@@ -53,8 +54,8 @@ export const usePersonalStore = defineStore("personalInfo", {
     },
     async logWorkout(entry) {
       const supabase = useSupabaseClient();
-      const result = this.weightLog.find((obj) =>
-      obj.date === this.currentDate
+      const result = this.weightLog.find(
+        (obj) => obj.date === this.currentDate
       );
 
       if (result) {
@@ -71,12 +72,12 @@ export const usePersonalStore = defineStore("personalInfo", {
     },
     async logCalories(entry) {
       const supabase = useSupabaseClient();
-      console.log(this.weightLog)
-      const result = this.weightLog.find((obj) =>
-        obj.date === this.currentDate
+      console.log(this.weightLog);
+      const result = this.weightLog.find(
+        (obj) => obj.date === this.currentDate
       );
 
-      this.todaysCalories = this.todaysCalories + entry.calories
+      this.todaysCalories = this.todaysCalories + entry.calories;
 
       if (result) {
         console.log(entry);
@@ -137,30 +138,31 @@ export const usePersonalStore = defineStore("personalInfo", {
       const userStore = useSupabaseUser();
 
       const { data: name } = await useAsyncData("name", async () => {
-        const { data, count } = await supabase
-          .from("dailyinputs")
-          .select("*", { count: "exact" })
-          .eq("date", this.currentDate);
+        const { data, count } = await supabase.from("dailyinputs").select("*");
 
-        if (count) {
-      
-          this.todaysCalories = data[0].calorie_count
-          this.todaysWorkout = data[0].workout
-          this.todaysWeight = data[0].weight
+        this.dailyInputs = data;
 
+        if (
+          this.dailyInputs[this.dailyInputs.length - 1].date ===
+          this.currentDate
+        ) {
+          console.log("todays entry existing");
+          this.todaysCalories =
+            this.dailyInputs[this.dailyInputs.length - 1].calorie_count;
+          this.todaysWorkout =
+            this.dailyInputs[this.dailyInputs.length - 1].workout;
+          this.todaysWeight =
+            this.dailyInputs[this.dailyInputs.length - 1].weight;
         } else {
-      
-  
-          const { data, error } = await supabase.from("dailyinputs").insert(
-            {
-              date: this.currentDate,
-              weight: 0,
-              user_id: userStore.value.id,
-              workout: 0,
-              calorie_count: 0,
-            },
-          );
-     
+          console.log("creating todays entry");
+
+          const { data, error } = await supabase.from("dailyinputs").insert({
+            date: this.currentDate,
+            weight: 0,
+            user_id: userStore.value.id,
+            workout: 0,
+            calorie_count: 0,
+          });
         }
       });
     },
