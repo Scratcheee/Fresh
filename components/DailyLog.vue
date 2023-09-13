@@ -8,7 +8,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(entry, index) in todaysMeals" :key="index">
+      <tr v-for="(entry, index) in meals" :key="index">
         <th @mouseover="mouseOver">{{ entry.name.substring(0, 8) }}{{ (entry.name.length > 8) ? "..." : "" }}</th>
         <td>{{ entry.calories }}</td>
         <td>{{ entry.type }}</td>
@@ -19,8 +19,8 @@
 </template>
 
 <script setup>
-const { foodLog } = defineProps({
-  foodLog: Array
+const { meals } = defineProps({
+  meals: Array
 
 })
 const todaysDate = new Date(new Date().getTime() - (new Date().getTimezoneOffset() * 60 * 1000)).toISOString().slice(0, 10)
