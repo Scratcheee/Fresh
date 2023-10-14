@@ -75,7 +75,15 @@ const date = new Date();
 
 const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 const localDate = date.toLocaleDateString('en-US', { timeZone: userTimezone });
+// const localDate = date.toISOString();
+
 const localTime = date.toLocaleTimeString('en-US', { timeZone: userTimezone });
+
+console.log(userTimezone)
+
+console.log(localDate)
+console.log(localTime)
+
 
 
 
@@ -122,7 +130,7 @@ const handleSubmit = (e) => {
   } else {
     alert('Enter all fields')
   }
-
+    console.log('pressed')
 }
 
 </script>

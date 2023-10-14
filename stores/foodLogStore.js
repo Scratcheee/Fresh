@@ -5,33 +5,42 @@ export const useFoodLogStore = defineStore("foodLog", {
     foodLog: [],
     meals: [],
     todaysEatenCals: 0,
-    currentDate: new Date(new Date().getTime() - (new Date().getTimezoneOffset()*60*1000)).toISOString().slice(0, 10),
+    currentDate: new Date(
+      new Date().getTime() - new Date().getTimezoneOffset() * 60 * 1000
+    )
+      .toISOString()
+      .slice(0, 10),
+    userTimezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
   }),
   actions: {
     async getLog() {
       const supabase = useSupabaseClient();
+      let date = new Date(); // Or the date you'd like converted.
+      let isoDateTime = new Date(
+        date.getTime() - date.getTimezoneOffset() * 60000
+      ).toISOString();
 
       const { data: name } = await useAsyncData("name", async () => {
-        const { data } = await supabase.from("foodlog").select("*")
+        const { data } = await supabase.from("foodlog").select("*");
         this.foodLog = data;
-        this.meals = data.filter((item) => item.date === this.currentDate);
+        this.meals = data.filter((item) => item.date === isoDateTime.slice(0, 10));
       });
-      
 
+      console.log(isoDateTime.slice(0, 10));
+
+      console.log(this.meals);
     },
 
     async addEntry(entry) {
       this.foodLog.push(entry);
-      this.meals.push(entry)
-      this.todaysEatenCals = this.todaysEatenCals + entry.calories
-      
+      this.meals.push(entry);
+      this.todaysEatenCals = this.todaysEatenCals + entry.calories;
+
       const supabase = useSupabaseClient();
 
       const { data: name } = await useAsyncData("name", async () => {
         const { data } = await supabase.from("foodlog").insert(entry);
       });
-
-
     },
   },
 });

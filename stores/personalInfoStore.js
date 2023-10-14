@@ -9,6 +9,7 @@ export const usePersonalStore = defineStore("personalInfo", {
     workoutCals: 0,
     todaysWorkout: 0,
     todaysWeight: 0,
+    startingWeight: 0,
     dailyInputs: [],
     currentDate: new Date(
       new Date().getTime() - new Date().getTimezoneOffset() * 60 * 1000
@@ -25,7 +26,9 @@ export const usePersonalStore = defineStore("personalInfo", {
         this.personalInfo = data;
         this.calorieGoal = data[0].calorie_goal;
         this.workoutCals = data[0].workout_cal;
+        this.startingWeight = data[0].starting_weight
       });
+      console.log(this.startingWeight)
     },
     async getWeightLog() {
       const supabase = useSupabaseClient();
@@ -103,6 +106,7 @@ export const usePersonalStore = defineStore("personalInfo", {
             .from("userdata")
             .update({
               starting_date: entry.starting_date,
+              starting_weight: entry.starting_weight,
               goal_weight: entry.goal_weight,
               height_in: entry.height_in,
               age: entry.age,
