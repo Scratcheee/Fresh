@@ -4,7 +4,7 @@
 
         <h6>Log Out</h6>
         <p>Are you sure you want to log out?</p>
-        <button>Log Out</button>
+        <button class="logout-button" @click="handleLogout">Log Out</button>
       </div>
       <div class="close">
 
@@ -12,9 +12,9 @@
     </div>
   </template>
   
-  <script>
-    export default {
-  }
+  <script setup>
+
+
   </script>
   
 
@@ -64,7 +64,7 @@ p {
   margin: 20px 0;
 }
 
-button {
+.logout-button {
   background-color: #ac003e;
   width: 150px;
   height: 40px;

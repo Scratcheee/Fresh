@@ -1,8 +1,22 @@
 <template>
-    <div class=" justify-around flex mt-6">
-        <div class="flex  gap-6">
+    <div class=" card content-center flex flex-col mt-6">
+        <div class="flex justify-around">
+            <div id="yesterday-box" class="flex flex-col p-2">
+                <span class="text-lg">Yesterday</span>
+                <span class="text-lg">-0.75 lbs</span>
+
+            </div>
+            <div id="overall-box" class="flex flex-col p-2">
+                <span class="text-lg">Overall</span>
+                <span class="text-lg">-10.2 lbs</span>
+
+            </div>
+        </div>
+
+
+        <div class="flex justify-around gap-6">
             <div>
-                <label class="label text-white">Todays Weight</label>
+                <label class="label ">Todays Weight</label>
                 <div class="flex">
                     <div class="relative w-full">
                         <input type="text"
@@ -15,7 +29,7 @@
             </div>
 
             <div>
-                <label class="label text-white">Workout</label>
+                <label class="label ">Workout</label>
                 <div class="flex">
                     <div class="relative w-full">
                         <div class="inline-flex rounded-md shadow-sm" role="group">
@@ -130,11 +144,32 @@ const logWeight = () => {
 
 <style scoped>
 .card {
-    background: #e0e9f1;
+    background: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    padding: 12px;
+    margin: 20px 0px 20px 0px;
 }
 
 .active {
     background: #9F46E4;
 
 }
+
+#yesterday-box {
+    border-radius: 10px;
+    background: #F9F6FF;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.10);
+}
+#yesterday-box span {
+    color: #805CB9;
+
+
+}
+#overall-box {
+    border-radius: 10px;
+background: #C3ACF8;
+box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.10);
+}
+
 </style>

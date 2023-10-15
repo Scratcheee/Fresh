@@ -19,11 +19,15 @@
 </template>
 
 <script setup>
+
+
+
 const { meals } = defineProps({
   meals: Array
 
 })
 const todaysDate = new Date(new Date().getTime() - (new Date().getTimezoneOffset() * 60 * 1000)).toISOString().slice(0, 10)
+
 
 const todaysMeals = computed(() => {
   return foodLog.filter((item) => item.date === todaysDate);

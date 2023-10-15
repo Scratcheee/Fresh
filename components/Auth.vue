@@ -57,6 +57,7 @@ const login = async () => {
         email: email.value,
         password: password.value
     })
+    alert('logging in')
 
 
 }

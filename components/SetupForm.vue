@@ -1,6 +1,6 @@
 <template>
     <form @submit.prevent="saveSettings">
-    <div class="flex justify-center items-center mt-3">
+    <div class="flex justify-center items-center mt-3 card">
 
         <div class="flex flex-col justify-center">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -164,6 +164,7 @@ const handleSubmit = () => {
 const saveSettings = () => {
     personalStore.updateUserData({
         starting_date: startingDate.value,
+        starting_weight: currentWeight.value,
         sex: sex.value,
         goal_weight: parseInt(goalWeight.value),
         height_in: parseInt((heightFt.value * 12) + heightIn.value),
@@ -178,4 +179,12 @@ const saveSettings = () => {
 
 </script>
 
-<style scoped></style>
+<style scoped>
+.card {
+  background: #e0e9f1;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  padding: 12px;
+  margin: 20px 0px 20px 0px;
+}
+</style>
