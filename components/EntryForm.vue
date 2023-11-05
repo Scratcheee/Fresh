@@ -79,10 +79,7 @@ const localDate = date.toLocaleDateString('en-US', { timeZone: userTimezone });
 
 const localTime = date.toLocaleTimeString('en-US', { timeZone: userTimezone });
 
-console.log(userTimezone)
 
-console.log(localDate)
-console.log(localTime)
 
 
 
@@ -93,7 +90,7 @@ const chooseMeal = (choice) => {
   for (let key in mealChosen.value) {
     mealChosen.value[key] = key === choice;
   }
-  console.log(mealChosen.value)
+
 }
 
 const chooseHunger = (choice) => {
@@ -130,7 +127,7 @@ const handleSubmit = (e) => {
   } else {
     alert('Enter all fields')
   }
-    console.log('pressed')
+
 }
 
 </script>

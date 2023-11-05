@@ -11,13 +11,13 @@
         <span class=" text-3xl">-</span>
 
         <div class="flex flex-col items-center"> 
-            <span class=" text-3xl">{{ todaysCals }}</span>
+            <span class=" text-3xl">{{ personalStore.todaysEntry.calorie_count }}</span>
             <span class="">Current</span>
         </div>
         <span class=" text-3xl">=</span>
 
         <div class="flex flex-col items-center"> 
-            <span class=" text-3xl">{{ calGoal - personalStore.todaysCalories + workout }}</span>
+            <span class=" text-3xl">{{ calGoal - personalStore.todaysEntry.calorie_count + (personalStore.todaysEntry.workout * personalStore.workoutCals) }}</span>
             <span class="">remaining</span>
         </div>
 
@@ -29,7 +29,7 @@
 
 <script setup>
 defineProps({
-    calCount: Number,
+    // calCount: Number,
     workout: Number,
     calGoal: Number,
 })

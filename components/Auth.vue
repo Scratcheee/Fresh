@@ -29,6 +29,8 @@
 </template>
 
 <script setup>
+import { useFoodLogStore } from '@/stores/foodLogStore';
+import { usePersonalStore } from '@/stores/personalInfoStore';
 const email = ref('')
 const password = ref('')
 const isSignUp = ref(false)
@@ -63,10 +65,24 @@ const login = async () => {
 }
 
 const user = useSupabaseUser()
+//Get user data on page load
+// const getData = () => {
+//     console.log('getting data')
+//     const foodStore = useFoodLogStore()
+//     const personalStore = usePersonalStore()
+//     personalStore.getPersonalInfo()
+//     personalStore.getTodaysData()
+//     foodStore.getLog()
+//     personalStore.getWeightLog()
+// }
+
+
 onMounted(() => {
     watchEffect(() => {
         if (user.value) {
+            
             navigateTo('/home')
+            //getData()
         }
     })
 })
