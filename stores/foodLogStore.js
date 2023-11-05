@@ -18,17 +18,20 @@ export const useFoodLogStore = defineStore("foodLog", {
       let date = new Date(); // Or the date you'd like converted.
       let isoDateTime = new Date(
         date.getTime() - date.getTimezoneOffset() * 60000
-      ).toISOString();
+      ).toISOString().slice(0, 10);
+      
 
       const { data: name } = await useAsyncData("name", async () => {
         const { data } = await supabase.from("foodlog").select("*");
         this.foodLog = data;
-        this.meals = data.filter((item) => item.date === isoDateTime.slice(0, 10));
+        this.meals = data.filter((item) => item.date === isoDateTime);
+        //this.meals = data.filter((item) => item.created_at.toLocaleDateString('en-US', { timeZone: this.userTimezone }) === date.toLocaleDateString('en-US', { timeZone: this.userTimezone }));
+        
       });
 
-      console.log(isoDateTime.slice(0, 10));
+      // const localDate = date.toLocaleDateString('en-US', { timeZone: this.userTimezone });
+      // console.log(`this is the local date: ${localDate}`);
 
-      console.log(this.meals);
     },
 
     async addEntry(entry) {

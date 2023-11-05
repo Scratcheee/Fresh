@@ -2,7 +2,7 @@
     
     <div class="flex flex-col basis-1/3 mx-auto mt-3 grow px-3 max-w-2xl">
 
-        <CalorieProgressBar :calCount="remainingCal" :workout="workout" :calGoal="calGoal" />
+        <CalorieProgressBar :workout="workout" :calGoal="calGoal" />
         <EntryForm />
         <DailyInputs />
 

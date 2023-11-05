@@ -1,17 +1,17 @@
 <template>
     <!-- <Navbar /> -->
-    
+
     <div>
         <div>
             <slot />
-            
+
         </div>
     </div>
     <div class="fixed bottom-0 right-0 m-4 p-4 text-xs text-slate-300 ">
         version 0.0.7
 
     </div>
-    
+
     <BottomNav />
 </template>
 
@@ -34,12 +34,18 @@ const logout = async () => {
         alert(error.message)
     }
 }
-const foodStore = useFoodLogStore()
-const personalStore = usePersonalStore()
-personalStore.getPersonalInfo()
-personalStore.getTodaysData()
-foodStore.getLog()
-personalStore.getWeightLog()
+
+//Get user data on page load
+const getData = () => {
+    const foodStore = useFoodLogStore()
+    const personalStore = usePersonalStore()
+    personalStore.getPersonalInfo()
+    personalStore.getDailyInputs()
+    foodStore.getLog()
+}
+
+getData()
+
 
 
 

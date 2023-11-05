@@ -3,19 +3,11 @@ import { defineStore } from "pinia";
 export const usePersonalStore = defineStore("personalInfo", {
   state: () => ({
     calorieGoal: 0,
-    todaysCalories: 0,
-    weightLog: [],
     personalInfo: [],
     workoutCals: 0,
-    todaysWorkout: 0,
-    todaysWeight: 0,
     startingWeight: 0,
     dailyInputs: [],
-    currentDate: new Date(
-      new Date().getTime() - new Date().getTimezoneOffset() * 60 * 1000
-    )
-      .toISOString()
-      .slice(0, 10),
+    todaysEntry: [],
   }),
   actions: {
     async getPersonalInfo() {
@@ -26,73 +18,72 @@ export const usePersonalStore = defineStore("personalInfo", {
         this.personalInfo = data;
         this.calorieGoal = data[0].calorie_goal;
         this.workoutCals = data[0].workout_cal;
-        this.startingWeight = data[0].starting_weight
+        this.startingWeight = data[0].starting_weight;
       });
-      console.log(this.startingWeight)
     },
-    async getWeightLog() {
+    async getDailyInputs() {
       const supabase = useSupabaseClient();
+      const userStore = useSupabaseUser();
+      let date = new Date(); // Or the date you'd like converted.
+      let isoDateTime = new Date(
+        date.getTime() - date.getTimezoneOffset() * 60000
+      )
+        .toISOString()
+        .slice(0, 10);
+
       const { data: name } = await useAsyncData("name", async () => {
-        const { data } = await supabase.from("dailyinputs").select("*");
-        this.todaysEatenCals = data.calorie_count;
-        this.weightLog = data;
+        const { data, count } = await supabase.from("dailyinputs").select("*");
+
+        this.dailyInputs = data;
+
+        if (this.dailyInputs.find((element) => element.date === isoDateTime)) {
+          console.log("todays entry existing");
+          this.todaysEntry = this.dailyInputs[this.dailyInputs.length - 1];
+          console.log(this.todaysEntry)
+        } else {
+          console.log("creating todays entry");
+
+          const { data, error } = await supabase
+            .from("dailyinputs")
+            .insert({
+              date: isoDateTime,
+              weight: 0,
+              user_id: userStore.value.id,
+              workout: 0,
+              calorie_count: 0,
+            })
+            .select();
+          //save new data from entry
+          this.todaysEntry = data;
+        }
       });
     },
     async logNewWeight(entry) {
       const supabase = useSupabaseClient();
-      const result = this.weightLog.find((obj) =>
-        obj.created_at.startsWith(this.currentDate)
-      );
 
-      if (result) {
-        const { data, error } = await supabase
-          .from("dailyinputs")
-          .update({ weight: entry.weight })
-          .eq("id", result.id);
-      } else {
-        const { data: name } = await useAsyncData("name", async () => {
-          const { data } = await supabase.from("dailyinputs").insert(entry);
-        });
-      }
+      const { data, error } = await supabase
+        .from("dailyinputs")
+        .update({ weight: entry.weight })
+        .eq("id", this.todaysEntry.id);
     },
     async logWorkout(entry) {
       const supabase = useSupabaseClient();
-      const result = this.weightLog.find(
-        (obj) => obj.date === this.currentDate
-      );
 
-      if (result) {
-        console.log(entry);
-        const { data, error } = await supabase
-          .from("dailyinputs")
-          .update({ workout: entry.workout })
-          .eq("id", result.id);
-      } else {
-        const { data: name } = await useAsyncData("name", async () => {
-          const { data } = await supabase.from("dailyinputs").insert(entry);
-        });
-      }
+      const { data, error } = await supabase
+        .from("dailyinputs")
+        .update({ workout: entry.workout })
+        .eq("id", this.todaysEntry.id);
     },
     async logCalories(entry) {
       const supabase = useSupabaseClient();
-      console.log(this.weightLog);
-      const result = this.weightLog.find(
-        (obj) => obj.date === this.currentDate
-      );
 
-      this.todaysCalories = this.todaysCalories + entry.calories;
+      this.todaysEntry.calorie_count =
+        this.todaysEntry.calorie_count + entry.calories;
 
-      if (result) {
-        console.log(entry);
-        const { data, error } = await supabase
-          .from("dailyinputs")
-          .update({ calorie_count: this.todaysCalories })
-          .eq("id", result.id);
-      } else {
-        const { data: name } = await useAsyncData("name", async () => {
-          const { data } = await supabase.from("dailyinputs").insert(entry);
-        });
-      }
+      const { data, error } = await supabase
+        .from("dailyinputs")
+        .update({ calorie_count: this.todaysEntry.calorie_count })
+        .eq("id", this.todaysEntry.id);
     },
     async updateUserData(entry) {
       const supabase = useSupabaseClient();
@@ -135,39 +126,6 @@ export const usePersonalStore = defineStore("personalInfo", {
             calorie_goal: entry.calorie_goal,
           })
           .eq("user_id", this.personalInfo[0].user_id);
-      });
-    },
-    async getTodaysData() {
-      const supabase = useSupabaseClient();
-      const userStore = useSupabaseUser();
-
-      const { data: name } = await useAsyncData("name", async () => {
-        const { data, count } = await supabase.from("dailyinputs").select("*");
-
-        this.dailyInputs = data;
-
-        if (
-          this.dailyInputs[this.dailyInputs.length - 1].date ===
-          this.currentDate
-        ) {
-          console.log("todays entry existing");
-          this.todaysCalories =
-            this.dailyInputs[this.dailyInputs.length - 1].calorie_count;
-          this.todaysWorkout =
-            this.dailyInputs[this.dailyInputs.length - 1].workout;
-          this.todaysWeight =
-            this.dailyInputs[this.dailyInputs.length - 1].weight;
-        } else {
-          console.log("creating todays entry");
-
-          const { data, error } = await supabase.from("dailyinputs").insert({
-            date: this.currentDate,
-            weight: 0,
-            user_id: userStore.value.id,
-            workout: 0,
-            calorie_count: 0,
-          });
-        }
       });
     },
   },
