@@ -8,7 +8,7 @@
             </div>
             <div id="overall-box" class="flex flex-col p-2">
                 <span class="text-lg">Overall</span>
-                <span class="text-lg">-10.2 lbs</span>
+                <span class="text-lg">{{ currentWeight - startingWeight }} lbs</span>
 
             </div>
         </div>
@@ -60,8 +60,8 @@ const personalStore = usePersonalStore()
 const foodStore = useFoodLogStore()
 const userStore = useSupabaseUser()
 const workoutChosen = ref({ 'half': false, 'full': false })
-
-const currentWeight = ref(personalStore.todaysWeight)
+const startingWeight = ref(personalStore.startingWeight)
+const currentWeight = ref(personalStore.todaysEntry.weight)
 const dailyWorkout = ref(0)
 const date = new Date();
 const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;

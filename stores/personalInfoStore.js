@@ -36,18 +36,31 @@ export const usePersonalStore = defineStore("personalInfo", {
 
         this.dailyInputs = data;
 
+        console.log(this.dailyInputs)
+
+
         if (this.dailyInputs.find((element) => element.date === isoDateTime)) {
           console.log("todays entry existing");
           this.todaysEntry = this.dailyInputs[this.dailyInputs.length - 1];
           console.log(this.todaysEntry)
         } else {
+          const maxDate = new Date(
+            Math.max(
+              ...this.dailyInputs.map(element => {
+                return new Date(element.date);
+              }),
+            ),
+          );
+          const prevWeight = this.dailyInputs.find((element) => element.date == maxDate.toISOString().slice(0, 10))
+  
+  
           console.log("creating todays entry");
 
           const { data, error } = await supabase
             .from("dailyinputs")
             .insert({
               date: isoDateTime,
-              weight: 0,
+              weight: prevWeight.weight,
               user_id: userStore.value.id,
               workout: 0,
               calorie_count: 0,
