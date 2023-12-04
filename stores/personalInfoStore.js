@@ -8,6 +8,7 @@ export const usePersonalStore = defineStore("personalInfo", {
     startingWeight: 0,
     dailyInputs: [],
     todaysEntry: [],
+    lastWeight: 0,
   }),
   actions: {
     async getPersonalInfo() {
@@ -36,18 +37,37 @@ export const usePersonalStore = defineStore("personalInfo", {
 
         this.dailyInputs = data;
 
-        if (this.dailyInputs.find((element) => element.date === isoDateTime)) {
+        console.log(this.dailyInputs)
+        this.lastWeight = this.dailyInputs.sort((a, b) => a.id - b.id)[this.dailyInputs.length - 2].weight
+        console.log(this.lastWeight)
+
+
+        console.log(isoDateTime)
+
+        const findDate = this.dailyInputs.find((element) => element.date === isoDateTime)
+        console.log(findDate)
+        if (findDate) {
           console.log("todays entry existing");
-          this.todaysEntry = this.dailyInputs[this.dailyInputs.length - 1];
-          console.log(this.todaysEntry)
+          this.todaysEntry = findDate;
+          console.log( this.todaysEntry)
         } else {
+          const maxDate = new Date(
+            Math.max(
+              ...this.dailyInputs.map(element => {
+                return new Date(element.date);
+              }),
+            ),
+          );
+          const prevWeight = this.dailyInputs.find((element) => element.date == maxDate.toISOString().slice(0, 10))
+  
+  
           console.log("creating todays entry");
 
           const { data, error } = await supabase
             .from("dailyinputs")
             .insert({
               date: isoDateTime,
-              weight: 0,
+              weight: prevWeight.weight,
               user_id: userStore.value.id,
               workout: 0,
               calorie_count: 0,
@@ -55,6 +75,8 @@ export const usePersonalStore = defineStore("personalInfo", {
             .select();
           //save new data from entry
           this.todaysEntry = data;
+
+          console.log(`down here: ${this.todaysEntry}`)
         }
       });
     },
