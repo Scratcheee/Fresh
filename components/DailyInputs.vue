@@ -3,7 +3,7 @@
         <div class="flex justify-around">
             <div id="yesterday-box" class="flex flex-col p-2">
                 <span class="text-lg">Yesterday</span>
-                <span class="text-lg">-0.75 lbs</span>
+                <span class="text-lg">{{currentWeight - lastWeight}} lbs</span>
 
             </div>
             <div id="overall-box" class="flex flex-col p-2">
@@ -62,6 +62,8 @@ const userStore = useSupabaseUser()
 const workoutChosen = ref({ 'half': false, 'full': false })
 const startingWeight = ref(personalStore.startingWeight)
 const currentWeight = ref(personalStore.todaysEntry.weight)
+const lastWeight = ref(personalStore.lastWeight)
+
 const dailyWorkout = ref(0)
 const date = new Date();
 const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
